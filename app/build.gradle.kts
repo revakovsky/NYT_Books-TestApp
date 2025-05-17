@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.google.services)
 }
 
 android {
@@ -60,6 +61,9 @@ dependencies {
     // Koin
     implementation(libs.bundles.koin)
     ksp(libs.koin.ksp.compiler)
+
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
 
     // Splash screen
     implementation(libs.androidx.core.splashscreen)
