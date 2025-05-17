@@ -44,6 +44,25 @@ android {
 
 dependencies {
 
+    // Modules Core
+    implementation(projects.core.network)
+    implementation(projects.core.database)
+    implementation(projects.core.data)
+    implementation(projects.core.domain)
+    implementation(projects.core.presentation.sharedUi)
+    implementation(projects.core.presentation.designSystem)
+
+    // Modules Auth
+    implementation(projects.auth.data)
+    implementation(projects.auth.domain)
+    implementation(projects.auth.presentation)
+
+    // Modules Books
+    implementation(projects.books.data)
+    implementation(projects.books.domain)
+    implementation(projects.books.presentation)
+
+
     // Core
     implementation(libs.bundles.android.library.core)
 

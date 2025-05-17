@@ -34,6 +34,9 @@ android {
 
 dependencies {
 
-    implementation(libs.androidx.core.ktx)
+    // Modules
+    implementation(projects.core.domain)
+    implementation(projects.books.domain)
+    implementation(projects.core.presentation.designSystem)
 
 }
