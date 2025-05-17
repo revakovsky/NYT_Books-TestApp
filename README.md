@@ -55,11 +55,10 @@ Concerns.
 - [Koin](https://insert-koin.io/docs/quickstart/android/)
 - [Ktor Client](https://ktor.io/docs/welcome.html)
 - [Room](https://developer.android.com/jetpack/androidx/releases/room)
-- [EncryptedSharedPreferences](https://developer.android.com/reference/androidx/security/crypto/EncryptedSharedPreferences)
 - [Coil](https://coil-kt.github.io/coil/)
 - [PullRefresh](https://developer.android.com/develop/ui/compose/components/pull-to-refresh)
 - [WebView](https://developer.android.com/develop/ui/views/layout/webapps/webview)
-- [ConnectivityManager](https://developer.android.com/training/monitoring-device-state/connectivity-status-type)
+- [Connectivity Manager](https://developer.android.com/training/monitoring-device-state/connectivity-status-type)
 
 ### Features and Functionality
 
