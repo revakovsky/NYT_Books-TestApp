@@ -44,6 +44,7 @@ Separation of Concerns
 - [Jetpack Navigation for Compose](https://developer.android.com/develop/ui/compose/navigation)
 - [Kotlin Coroutines](https://kotlinlang.org/docs/coroutines-overview.html#)
 - [Kotlin Flows](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/#)
+- [Firebase Authentication (Google Sign-In)](https://firebase.google.com/docs/auth/android/google-signin)
 - [Koin](https://insert-koin.io/docs/quickstart/android/)
 - [Ktor Client](https://ktor.io/docs/welcome.html)
 - [Room](https://developer.android.com/jetpack/androidx/releases/room)
