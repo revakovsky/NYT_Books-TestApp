@@ -10,7 +10,6 @@ sealed interface DataError : Error {
         SERVER_ERROR,
         NO_INTERNET,
         SERIALIZATION,
-        BAD_RESPONSE,
         UNKNOWN,
     }
 

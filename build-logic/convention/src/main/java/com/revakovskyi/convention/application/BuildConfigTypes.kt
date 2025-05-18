@@ -12,7 +12,7 @@ private const val API_KEY = "API_KEY"
 private const val API_KEY_VALUE = "JNd7LkmFEYe6WelU5YG2FwZAXAeGCAH4"
 
 private const val BASE_URL = "BASE_URL"
-private const val BASE_URL_VALUE = "https://api.nytimes.com/svc/books/v3/"
+private const val BASE_URL_VALUE = "https://api.nytimes.com/svc/books/v3"
 
 
 internal fun Project.configureBuildTypes(

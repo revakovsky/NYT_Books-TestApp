@@ -14,7 +14,6 @@ fun DataError.asUiText(): UiText {
         DataError.Network.SERVER_ERROR -> UiText.StringResource(R.string.error_server_error)
         DataError.Network.NO_INTERNET -> UiText.StringResource(R.string.error_no_internet)
         DataError.Network.SERIALIZATION -> UiText.StringResource(R.string.error_serialization)
-        DataError.Network.BAD_RESPONSE -> UiText.StringResource(R.string.error_bad_response)
         DataError.Network.UNKNOWN -> UiText.StringResource(R.string.error_unknown)
     }
 }
