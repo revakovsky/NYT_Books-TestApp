@@ -10,5 +10,6 @@ dependencies {
 
     // Modules
     implementation(projects.core.presentation.theme)
+    implementation(projects.core.presentation.utils)
 
 }

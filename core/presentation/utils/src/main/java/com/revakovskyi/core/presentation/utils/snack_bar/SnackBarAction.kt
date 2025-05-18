@@ -1,4 +1,4 @@
-package com.revakovskyi.core.presentation.utils.snack_bar_models
+package com.revakovskyi.core.presentation.utils.snack_bar
 
 data class SnackBarAction(
     val name: String,

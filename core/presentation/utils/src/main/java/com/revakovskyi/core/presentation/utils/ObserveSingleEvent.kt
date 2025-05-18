@@ -14,14 +14,16 @@ fun <T> ObserveSingleEvent(
     flow: Flow<T>,
     key1: Any? = null,
     key2: Any? = null,
-    onEvent: (T) -> Unit,
+    onEvent: suspend (T) -> Unit,
 ) {
     val lifecycleOwner = LocalLifecycleOwner.current
 
     LaunchedEffect(flow, lifecycleOwner.lifecycle, key1, key2) {
         lifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
             withContext(Dispatchers.Main.immediate) {
-                flow.collect(onEvent)
+                flow.collect { event ->
+                    onEvent(event)
+                }
             }
         }
     }

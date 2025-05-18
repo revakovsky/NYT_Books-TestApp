@@ -1,6 +1,5 @@
-package com.revakovskyi.core.presentation.utils
+package com.revakovskyi.core.presentation.utils.snack_bar
 
-import com.revakovskyi.core.presentation.utils.snack_bar_models.SnackBarEvent
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 

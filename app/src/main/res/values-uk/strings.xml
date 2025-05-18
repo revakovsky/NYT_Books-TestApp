@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">NYT Books</string>
+    <string name="no_internet_connection">Немає підключення до інтернету</string>
+    <string name="settings">Налаштування</string>
 </resources>
