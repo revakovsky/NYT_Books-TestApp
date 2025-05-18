@@ -1,4 +1,4 @@
-package com.revakovskyi.nytbooks
+package com.revakovskyi.nytbooks.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
