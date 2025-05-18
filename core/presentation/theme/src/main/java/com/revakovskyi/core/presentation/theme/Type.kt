@@ -1,4 +1,4 @@
-package com.revakovskyi.nytbooks.ui.theme
+package com.revakovskyi.core.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

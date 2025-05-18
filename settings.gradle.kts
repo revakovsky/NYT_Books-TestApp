@@ -1,6 +1,7 @@
 @file:Suppress("UnstableApiUsage")
 
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google {
             content {
@@ -20,8 +21,9 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-
+gradle.startParameter.excludedTaskNames.addAll(listOf(":build-logic:convention:testClasses"))
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 
 rootProject.name = "NYT_Books"
 
@@ -35,8 +37,9 @@ include(":core:database")
 include(":core:network")
 include(":core:data")
 include(":core:domain")
+include(":core:presentation:theme")
 include(":core:presentation:design_system")
-include(":core:presentation:shared_ui")
+include(":core:presentation:utils")
 
 include(":books:data")
 include(":books:domain")

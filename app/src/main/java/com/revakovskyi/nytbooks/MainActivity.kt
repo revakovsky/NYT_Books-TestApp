@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.revakovskyi.nytbooks.ui.theme.NYTBooksTheme
+import com.revakovskyi.core.presentation.theme.NYTBooksTheme
 
 class MainActivity : ComponentActivity() {
 
