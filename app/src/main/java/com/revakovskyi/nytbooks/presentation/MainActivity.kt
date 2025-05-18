@@ -5,15 +5,17 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.revakovskyi.core.presentation.theme.NYTBooksTheme
+import com.revakovskyi.nytbooks.navigation.AppNavGraph
 
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         setContent {
             NYTBooksTheme {
-
+                AppNavGraph(isSignedIn = false)
             }
         }
     }
