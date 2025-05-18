@@ -15,6 +15,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.revakovskyi.core.presentation.utils.ObserveSingleEvent
@@ -48,7 +49,7 @@ fun DefaultSnackBarHost(
 
     snackBarEvent?.let { event ->
 
-        SnackbarHost(snackBarHostState) { data: SnackbarData ->
+        SnackbarHost(hostState = snackBarHostState) { data: SnackbarData ->
 
             Snackbar(
                 containerColor = MaterialTheme.colorScheme.surface,
@@ -83,6 +84,7 @@ fun DefaultSnackBarHost(
                 modifier = Modifier
                     .padding(horizontal = 8.dp)
                     .padding(bottom = 12.dp)
+                    .shadow(elevation = 5.dp)
             )
 
         }

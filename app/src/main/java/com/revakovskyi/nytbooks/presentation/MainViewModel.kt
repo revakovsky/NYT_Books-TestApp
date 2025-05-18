@@ -31,7 +31,7 @@ class MainViewModel(
     private fun observeInitialData() {
         // TODO: update initial data and remove a code below!
         viewModelScope.launch {
-            delay(2000)
+            delay(1000)
 
             _event.send(MainEvent.ShowInternetNotification)
             _state.update { it.copy(isSignedIn = true) }

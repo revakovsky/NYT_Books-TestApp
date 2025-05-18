@@ -11,28 +11,21 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val lightThemeColors = lightColorScheme(
-    primary = lightPrimary,
-    onPrimary = lightOnPrimary,
-    primaryContainer = lightPrimaryContainer,
-
-    background = lightBackground,
-    onBackground = lightOnBackground,
-
-    surface = lightSurface,
-    onSurface = lightOnSurface,
+    primary = LightCardBackground,
+    surface = LightSurface,
+    onSurface = LightOnSurface,
+    background = LightCardBackground,
+    onBackground = LightPrimaryText,
+    secondary = LightSecondaryText,
 )
 
-
 private val darkThemeColors = darkColorScheme(
-    primary = darkPrimary,
-    onPrimary = darkOnPrimary,
-    primaryContainer = darkPrimaryContainer,
-
-    background = darkBackground,
-    onBackground = darkOnBackground,
-
-    surface = darkSurface,
-    onSurface = darkOnSurface,
+    primary = DarkCardBackground,
+    surface = DarkSurface,
+    onSurface = DarkOnSurface,
+    background = DarkCardBackground,
+    onBackground = DarkPrimaryText,
+    secondary = DarkSecondaryText,
 )
 
 
@@ -49,8 +42,8 @@ fun NYTBooksTheme(
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = false
-            WindowCompat.getInsetsController(window, view).isAppearanceLightNavigationBars = false
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
+            WindowCompat.getInsetsController(window, view).isAppearanceLightNavigationBars = !darkTheme
         }
     }
 
