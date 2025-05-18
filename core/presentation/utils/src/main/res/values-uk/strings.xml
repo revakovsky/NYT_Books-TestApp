@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Local errors -->
+    <string name="error_disk_full">Недостатньо вільного місця на пристрої</string>
+    <string name="error_db_unknown">Невідома помилка бази даних</string>
+
+    <!-- Network errors -->
+    <string name="error_unauthorized">Неавторизований запит. Перевірте ключ API</string>
+    <string name="error_forbidden">Доступ заборонено. У вас немає прав</string>
+    <string name="error_not_found">Дані не знайдено</string>
+    <string name="error_too_many_requests">Забагато запитів. Спробуйте пізніше</string>
+    <string name="error_server_error">Помилка сервера. Спробуйте пізніше</string>
+    <string name="error_no_internet">Немає підключення до інтернету</string>
+    <string name="error_serialization">Помилка обробки даних</string>
+    <string name="error_bad_response">Невірна відповідь від сервера</string>
+    <string name="error_unknown">Сталася невідома помилка</string>
+</resources>
