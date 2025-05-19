@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Local errors -->
+    <string name="error_disk_full">Not enough storage space</string>
+    <string name="error_db_unknown">Unknown database error</string>
+
+    <!-- Network errors -->
+    <string name="error_unauthorized">Unauthorized request. Check your API key</string>
+    <string name="error_forbidden">Access denied. You are not allowed to access this resource</string>
+    <string name="error_not_found">Data not found</string>
+    <string name="error_too_many_requests">Too many requests. Please try again later</string>
+    <string name="error_server_error">Server error. Please try again later</string>
+    <string name="error_no_internet">No Internet connection</string>
+    <string name="error_serialization">Data parsing error</string>
+    <string name="error_unknown">Unknown error occurred</string>
+
+    <!-- Internet statuses -->
+    <string name="internet_no_connection">No Internet connection</string>
+    <string name="internet_restored">Internet restored</string>
+</resources>
