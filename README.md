@@ -47,7 +47,7 @@ Concerns.
 - [Multi-module project structure](https://developer.android.com/topic/modularization)
 - [Gradle Convention Plugin](https://docs.gradle.org/current/userguide/plugins.html)
 - [MVVM Architecture](https://developer.android.com/topic/architecture)
-- [Type-safe Jetpack Compose Navigation for Compose](https://developer.android.com/develop/ui/compose/navigation)
+- [Nested Type-safe Jetpack Compose Navigation](https://developer.android.com/develop/ui/compose/navigation)
 - [Kotlin Coroutines](https://kotlinlang.org/docs/coroutines-overview.html#)
 - [Kotlin Flows](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/#)
 - [Android Splash Screen API](https://developer.android.com/develop/ui/views/launch/splash-screen)
@@ -64,7 +64,6 @@ Concerns.
 
 - Custom Result class to process Http requests and errors
 - Kotlin Flows to transfer data
-- Work with focusable states and bringIntoButtonViewRequester
 - Portrait / Landscape screen orientation support
 - Animated screen transitions
 - Light / Dark modes
