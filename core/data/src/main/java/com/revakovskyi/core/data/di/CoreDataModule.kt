@@ -1,0 +1,13 @@
+package com.revakovskyi.core.data.di
+
+import com.revakovskyi.core.data.connectivity.InternetConnectivityObserver
+import com.revakovskyi.core.domain.connectivity.ConnectivityObserver
+import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.bind
+import org.koin.dsl.module
+
+val coreDataModule = module {
+
+    singleOf(::InternetConnectivityObserver).bind<ConnectivityObserver>()
+
+}

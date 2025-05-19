@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">NYT Books</string>
-    <string name="no_internet_connection">No Internet connection</string>
     <string name="settings">Settings</string>
 </resources>

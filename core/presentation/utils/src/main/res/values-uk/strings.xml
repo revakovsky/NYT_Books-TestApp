@@ -13,4 +13,8 @@
     <string name="error_no_internet">Немає підключення до інтернету</string>
     <string name="error_serialization">Помилка обробки даних</string>
     <string name="error_unknown">Сталася невідома помилка</string>
+
+    <!-- Internet statuses -->
+    <string name="internet_no_connection">Немає підключення до інтернету</string>
+    <string name="internet_restored">Інтернет відновлено</string>
 </resources>

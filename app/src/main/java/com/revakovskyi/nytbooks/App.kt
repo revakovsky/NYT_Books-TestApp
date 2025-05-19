@@ -1,6 +1,7 @@
 package com.revakovskyi.nytbooks
 
 import android.app.Application
+import com.revakovskyi.core.data.di.coreDataModule
 import com.revakovskyi.nytbooks.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -21,6 +22,7 @@ class App : Application() {
             modules(
                 listOf(
                     appModule,
+                    coreDataModule,
                 )
             )
         }

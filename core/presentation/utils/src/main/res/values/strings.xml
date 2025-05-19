@@ -13,4 +13,8 @@
     <string name="error_no_internet">No Internet connection</string>
     <string name="error_serialization">Data parsing error</string>
     <string name="error_unknown">Unknown error occurred</string>
+
+    <!-- Internet statuses -->
+    <string name="internet_no_connection">No Internet connection</string>
+    <string name="internet_restored">Internet restored</string>
 </resources>

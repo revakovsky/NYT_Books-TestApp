@@ -68,15 +68,17 @@ private fun MainContent(viewModel: MainViewModel) {
 
     ObserveSingleEvent(flow = viewModel.event) { event ->
         when (event) {
-            MainEvent.ShowInternetNotification -> {
+            is MainEvent.ShowInternetStatus -> {
                 SnackBarController.sendEvent(
                     SnackBarEvent(
-                        message = context.getString(R.string.no_internet_connection),
-                        snackBarDuration = SnackbarDuration.Long,
-                        action = SnackBarAction(
-                            name = context.getString(R.string.settings),
-                            action = { settingsLauncher.launch(Intent(Settings.ACTION_WIFI_SETTINGS)) }
-                        )
+                        message = event.message.asString(context),
+                        snackBarDuration = if (event.internetAvailable) SnackbarDuration.Short else SnackbarDuration.Long,
+                        action = if (!event.internetAvailable) {
+                            SnackBarAction(
+                                name = context.getString(R.string.settings),
+                                action = { settingsLauncher.launch(Intent(Settings.ACTION_WIFI_SETTINGS)) }
+                            )
+                        } else null
                     )
                 )
             }
