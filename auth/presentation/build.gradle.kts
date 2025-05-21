@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.nytbooks.android.feature.ui)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -14,7 +15,8 @@ dependencies {
     implementation(projects.core.presentation.theme)
     implementation(projects.core.presentation.utils)
 
-    //Koin
-    implementation(project.libs.bundles.koin)
+    // Koin
+    implementation(libs.bundles.koin)
+    ksp(libs.koin.ksp.compiler)
 
 }
