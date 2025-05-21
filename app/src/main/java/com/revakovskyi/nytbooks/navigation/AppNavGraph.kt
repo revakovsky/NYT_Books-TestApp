@@ -8,6 +8,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
+import com.revakovskyi.auth.presentation.SignInScreenRoot
+import com.revakovskyi.books.presentation.categories.CategoriesScreenRoot
 
 @Composable
 fun AppNavGraph(isSignedIn: Boolean) {
@@ -35,7 +37,7 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
     navigation<Graph.Auth>(startDestination = Graph.Auth.Destination.SignIn) {
 
         composable<Graph.Auth.Destination.SignIn> {
-            // TODO: add a Sign In screen
+            SignInScreenRoot()
         }
 
     }
@@ -48,7 +50,7 @@ private fun NavGraphBuilder.booksGraph(navController: NavHostController) {
     navigation<Graph.Books>(startDestination = Graph.Books.Destination.Categories) {
 
         composable<Graph.Books.Destination.Categories> {
-            // TODO: add a Categories screen
+            CategoriesScreenRoot()
         }
 
         composable<Graph.Books.Destination.BookList> {
