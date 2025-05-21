@@ -25,8 +25,6 @@ dependencies {
     implementation(projects.core.presentation.utils)
 
     // Modules Auth
-    implementation(projects.auth.data)
-    implementation(projects.auth.domain)
     implementation(projects.auth.presentation)
 
     // Modules Books

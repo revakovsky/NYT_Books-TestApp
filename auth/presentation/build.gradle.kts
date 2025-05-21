@@ -10,7 +10,6 @@ android {
 dependencies {
 
     // Modules
-    implementation(projects.auth.domain)
     implementation(projects.core.domain)
     implementation(projects.core.presentation.theme)
     implementation(projects.core.presentation.utils)

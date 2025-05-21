@@ -29,8 +29,6 @@ rootProject.name = "NYT_Books"
 
 include(":app")
 
-include(":auth:data")
-include(":auth:domain")
 include(":auth:presentation")
 
 include(":core:database")
