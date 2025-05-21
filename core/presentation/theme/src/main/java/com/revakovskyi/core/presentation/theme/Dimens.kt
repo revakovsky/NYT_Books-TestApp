@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.dp
 
 val LocalDimens = compositionLocalOf { Dimens() }
 
-val MaterialTheme.Dimens: Dimens
+val MaterialTheme.dimens: Dimens
     @Composable
     @ReadOnlyComposable
     get() = LocalDimens.current

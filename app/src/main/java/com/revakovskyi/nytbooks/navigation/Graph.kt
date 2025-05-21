@@ -9,7 +9,7 @@ sealed interface Graph {
 
         sealed interface Destination {
             @Serializable
-            data object SignIn : Destination
+            data class SignIn(val forceSignOut: Boolean = false) : Destination
         }
     }
 

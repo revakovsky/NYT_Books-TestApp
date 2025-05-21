@@ -2,7 +2,7 @@ package com.revakovskyi.nytbooks.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.revakovskyi.auth.domain.AuthClient
+import com.revakovskyi.auth.presentation.auth_client.AuthClient
 import com.revakovskyi.core.domain.connectivity.ConnectivityObserver
 import com.revakovskyi.core.domain.connectivity.InternetStatus
 import com.revakovskyi.core.presentation.utils.text_converters.toUiText

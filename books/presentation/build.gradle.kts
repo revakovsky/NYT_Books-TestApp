@@ -13,6 +13,7 @@ dependencies {
     implementation(projects.core.domain)
     implementation(projects.core.presentation.theme)
     implementation(projects.core.presentation.utils)
+    implementation(projects.core.presentation.designSystem)
 
     //Koin
     implementation(project.libs.bundles.koin)

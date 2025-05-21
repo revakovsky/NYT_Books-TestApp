@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sign_in_to_continue">Увійдіть, щоб продовжити</string>
+    <string name="please_wait">Будь ласка, зачекайте…</string>
+    <string name="google_logo">Логотип Google</string>
+    <string name="authenticated_successfully">Успішна автентифікація!</string>
+    <string name="signed_out_successfully">Ви вийшли з облікового запису</string>
+</resources>

@@ -19,4 +19,8 @@ dependencies {
     implementation(libs.bundles.koin)
     ksp(libs.koin.ksp.compiler)
 
+    // Auth
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.bundles.auth)
+
 }

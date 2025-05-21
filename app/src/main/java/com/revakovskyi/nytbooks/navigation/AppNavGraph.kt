@@ -34,10 +34,16 @@ fun AppNavGraph(isSignedIn: Boolean) {
 
 private fun NavGraphBuilder.authGraph(navController: NavHostController) {
 
-    navigation<Graph.Auth>(startDestination = Graph.Auth.Destination.SignIn) {
+    navigation<Graph.Auth>(startDestination = Graph.Auth.Destination.SignIn()) {
 
         composable<Graph.Auth.Destination.SignIn> {
-            SignInScreenRoot()
+            SignInScreenRoot(
+                onSuccessfulSignIn = {
+                    navController.navigate(Graph.Books) {
+                        popUpTo<Graph.Auth> { inclusive = true }
+                    }
+                }
+            )
         }
 
     }
@@ -50,7 +56,13 @@ private fun NavGraphBuilder.booksGraph(navController: NavHostController) {
     navigation<Graph.Books>(startDestination = Graph.Books.Destination.Categories) {
 
         composable<Graph.Books.Destination.Categories> {
-            CategoriesScreenRoot()
+            CategoriesScreenRoot(
+                signOut = {
+                    navController.navigate(Graph.Auth.Destination.SignIn(forceSignOut = true)) {
+                        popUpTo<Graph.Books> { inclusive = true }
+                    }
+                }
+            )
         }
 
         composable<Graph.Books.Destination.BookList> {

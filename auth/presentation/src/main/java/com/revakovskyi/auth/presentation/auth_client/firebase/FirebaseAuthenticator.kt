@@ -1,4 +1,4 @@
-package com.revakovskyi.auth.data.firebase
+package com.revakovskyi.auth.presentation.auth_client.firebase
 
 import android.util.Log
 import com.google.firebase.auth.AuthCredential
