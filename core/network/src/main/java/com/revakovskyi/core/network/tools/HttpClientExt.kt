@@ -1,7 +1,7 @@
 package com.revakovskyi.core.network.tools
 
 import android.util.Log
-import com.revakovskyi.core.domain.util.DataError
+import com.revakovskyi.core.domain.books.DataError
 import com.revakovskyi.core.domain.util.Result
 import com.revakovskyi.core.network.BuildConfig
 import io.ktor.client.HttpClient

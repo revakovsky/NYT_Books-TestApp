@@ -17,4 +17,14 @@
     <!-- Internet statuses -->
     <string name="internet_no_connection">Немає підключення до інтернету</string>
     <string name="internet_restored">Інтернет відновлено</string>
+
+    <!-- Auth errors -->
+    <string name="auth_no_google_account">Обліковий запис Google не знайдено на пристрої</string>
+    <string name="auth_credential_fetch_failed">Не вдалося отримати облікові дані</string>
+    <string name="auth_unsupported_credential_type">Непідтримуваний тип облікових даних</string>
+    <string name="auth_credential_clear_failed">Не вдалося очистити збережені облікові дані Google. Спробуйте ще раз.</string>
+    <string name="auth_invalid_user">Недійсний обліковий запис</string>
+    <string name="auth_invalid_credentials">Недійсні облікові дані</string>
+    <string name="auth_account_collision">Обліковий запис вже використовується</string>
+    <string name="auth_unknown_error">Помилка авторизації. Спробуйте ще раз</string>
 </resources>

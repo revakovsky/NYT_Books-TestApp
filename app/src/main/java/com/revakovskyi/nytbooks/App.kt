@@ -1,6 +1,7 @@
 package com.revakovskyi.nytbooks
 
 import android.app.Application
+import com.revakovskyi.auth.data.di.authDataModule
 import com.revakovskyi.core.data.di.coreDataModule
 import com.revakovskyi.nytbooks.di.appModule
 import org.koin.android.ext.koin.androidContext
@@ -23,6 +24,7 @@ class App : Application() {
                 listOf(
                     appModule,
                     coreDataModule,
+                    authDataModule,
                 )
             )
         }

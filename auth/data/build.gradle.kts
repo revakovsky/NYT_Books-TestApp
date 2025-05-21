@@ -16,4 +16,8 @@ dependencies {
     //Koin
     implementation(project.libs.bundles.koin)
 
+    // Auth
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.bundles.auth)
+
 }

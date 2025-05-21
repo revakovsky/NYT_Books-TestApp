@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.revakovskyi.core.domain.connectivity.ConnectivityObserver
 import com.revakovskyi.core.domain.connectivity.InternetStatus
-import com.revakovskyi.core.presentation.utils.toUiText
+import com.revakovskyi.core.presentation.utils.text_converters.toUiText
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
