@@ -17,4 +17,14 @@
     <!-- Internet statuses -->
     <string name="internet_no_connection">No Internet connection</string>
     <string name="internet_restored">Internet restored</string>
+
+    <!-- Auth errors -->
+    <string name="auth_no_google_account">No Google account found on device</string>
+    <string name="auth_credential_fetch_failed">Unable to fetch credentials</string>
+    <string name="auth_unsupported_credential_type">Unsupported credential type</string>
+    <string name="auth_credential_clear_failed">Failed to clear saved Google account credentials. Please try again.</string>
+    <string name="auth_invalid_user">Invalid user account</string>
+    <string name="auth_invalid_credentials">Invalid credentials</string>
+    <string name="auth_account_collision">Account already in use</string>
+    <string name="auth_unknown_error">Authentication failed. Please try again</string>
 </resources>

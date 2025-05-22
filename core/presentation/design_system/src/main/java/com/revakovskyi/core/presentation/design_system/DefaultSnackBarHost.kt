@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import com.revakovskyi.core.presentation.utils.ObserveSingleEvent
 import com.revakovskyi.core.presentation.utils.snack_bar.SnackBarController
 import com.revakovskyi.core.presentation.utils.snack_bar.SnackBarEvent
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 @Composable
@@ -28,6 +29,7 @@ fun DefaultSnackBarHost(
     snackBarHostState: SnackbarHostState,
 ) {
     val coroutineScope = rememberCoroutineScope()
+    var snackBarJob by remember { mutableStateOf<Job?>(null) }
 
     var snackBarEvent by remember { mutableStateOf<SnackBarEvent?>(null) }
 
@@ -37,13 +39,15 @@ fun DefaultSnackBarHost(
         key1 = snackBarHostState
     ) { event ->
         snackBarEvent = event
-        snackBarHostState.currentSnackbarData?.dismiss()
+        snackBarJob?.cancel()
 
-        snackBarHostState.showSnackbar(
-            message = event.message,
-            actionLabel = event.action?.name,
-            duration = event.snackBarDuration,
-        )
+        snackBarJob = coroutineScope.launch {
+            snackBarHostState.showSnackbar(
+                message = event.message,
+                actionLabel = event.action?.name,
+                duration = event.snackBarDuration,
+            )
+        }
     }
 
 

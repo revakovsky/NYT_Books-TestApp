@@ -11,21 +11,21 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val lightThemeColors = lightColorScheme(
-    primary = LightCardBackground,
-    surface = LightSurface,
-    onSurface = LightOnSurface,
-    background = LightCardBackground,
-    onBackground = LightPrimaryText,
-    secondary = LightSecondaryText,
+    primary = BackgroundWhite_Light,
+    background = BackgroundWhite_Light,
+    onBackground = OnBackgroundBlack_Light,
+    surface = SurfaceWhite_Light,
+    onSurface = OnSurfaceBlack_Light,
+    secondary = SecondaryGray_Light,
 )
 
 private val darkThemeColors = darkColorScheme(
-    primary = DarkCardBackground,
-    surface = DarkSurface,
-    onSurface = DarkOnSurface,
-    background = DarkCardBackground,
-    onBackground = DarkPrimaryText,
-    secondary = DarkSecondaryText,
+    primary = BackgroundBlack_Dark,
+    background = BackgroundBlack_Dark,
+    onBackground = OnBackgroundWhite_Dark,
+    surface = SurfaceBlack_Dark,
+    onSurface = OnSurfaceWhite_Dark,
+    secondary = SecondaryGray_Dark,
 )
 
 

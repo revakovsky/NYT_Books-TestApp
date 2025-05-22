@@ -33,7 +33,7 @@ Users are notified of their connection status accordingly.
 
 ### Architecture & Principles
 
-The project follows the Clean Architecture approach and the MVVM architectural pattern.
+The project follows the Clean Architecture approach and the MVI architectural pattern.
 It is structured as a multi-module, offline-first application, designed with scalability and
 maintainability in mind.  
 The codebase adheres to key software engineering principles: DRY, KISS, SOLID, and Separation of
@@ -46,7 +46,7 @@ Concerns.
 - [Material 3](https://developer.android.com/develop/ui/compose/designsystems/material3)
 - [Multi-module project structure](https://developer.android.com/topic/modularization)
 - [Gradle Convention Plugin](https://docs.gradle.org/current/userguide/plugins.html)
-- [MVVM Architecture](https://developer.android.com/topic/architecture)
+- [MVI Architecture](https://developer.android.com/topic/architecture)
 - [Nested Type-safe Jetpack Compose Navigation](https://developer.android.com/develop/ui/compose/navigation)
 - [Kotlin Coroutines](https://kotlinlang.org/docs/coroutines-overview.html#)
 - [Kotlin Flows](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/#)

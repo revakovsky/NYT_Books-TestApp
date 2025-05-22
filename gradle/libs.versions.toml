@@ -29,7 +29,7 @@ androidTools = "31.10.0"
 # Compose
 composeCompiler = "1.5.10"
 activityCompose = "1.10.1"
-composeBom = "2025.05.00"
+composeBom = "2025.05.01"
 navigationCompose = "2.9.0"
 
 # Ktor
@@ -46,14 +46,14 @@ room = "2.7.1"
 # Coil
 coilCompose = "2.6.0"
 
-# Firebase
-firebaseBom = "33.13.0"
-
-# Google
+# Auth
+firebaseBom = "33.14.0"
 googleServices = "4.4.2"
+credentials = "1.5.0"
+googleid = "1.1.1"
 
 # Pull Refresh
-ver_PullRefresh = "1.8.1"
+ver_PullRefresh = "1.8.2"
 
 # Timber
 timber = "5.0.1"
@@ -118,9 +118,12 @@ ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "k
 # Coil
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coilCompose" }
 
-# Firebase
+# Auth
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
 firebase-auth = { module = "com.google.firebase:firebase-auth" }
+androidx-credentials = { module = "androidx.credentials:credentials", version.ref = "credentials" }
+androidx-credentials-play-services-auth = { module = "androidx.credentials:credentials-play-services-auth", version.ref = "credentials" }
+googleid = { module = "com.google.android.libraries.identity.googleid:googleid", version.ref = "googleid" }
 
 # Pull Refresh
 compose-pullrefresh = { group = "androidx.compose.material", name = "material", version.ref = "ver_PullRefresh" }
@@ -171,6 +174,7 @@ compose = [
     "androidx-ui-graphics",
     "androidx-ui-tooling-preview",
     "androidx-material3",
+    "androidx-ui-test-junit4"
 ]
 
 compose-debug = [
@@ -199,4 +203,11 @@ ktor = [
 room = [
     "room-runtime",
     "room-ktx"
+]
+
+auth = [
+    "firebase-auth",
+    "androidx-credentials",
+    "androidx-credentials-play-services-auth",
+    "googleid",
 ]

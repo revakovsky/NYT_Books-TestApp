@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+     <string name="web_client_id" translatable="false">
+        326889961629-5lih9dep3ehpc45bi1tm30v38k0n2tsi.apps.googleusercontent.com
+    </string>
+    <string name="nyt" translatable="false">New York Times</string>
+    <string name="books" translatable="false">Books</string>
+    <string name="sign_in_to_continue">Sign in to continue</string>
+    <string name="sign_in_with_google" translatable="false">Sign in with Google</string>
+    <string name="please_wait">Please wait…</string>
+    <string name="google_logo">Google Logo</string>
+    <string name="authenticated_successfully">Authenticated successfully!</string>
+    <string name="signed_out_successfully">Signed out successfully</string>
+</resources>

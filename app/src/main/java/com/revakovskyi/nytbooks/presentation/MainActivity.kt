@@ -10,7 +10,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
@@ -89,13 +88,11 @@ private fun MainContent(viewModel: MainViewModel) {
     Scaffold(
         snackbarHost = { DefaultSnackBarHost(snackBarHostState) },
         modifier = Modifier.fillMaxSize()
-    ) { innerPadding ->
+    ) { _ ->
 
         Surface(
             color = MaterialTheme.colorScheme.primary,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
+            modifier = Modifier.fillMaxSize()
         ) {
             val state = viewModel.state.collectAsStateWithLifecycle().value
 
