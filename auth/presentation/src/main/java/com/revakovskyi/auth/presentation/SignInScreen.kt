@@ -100,13 +100,14 @@ private fun SignInScreen(
 ) {
 
     Column(
+        verticalArrangement = Arrangement.SpaceAround,
         modifier = Modifier
             .fillMaxSize()
             .padding(MaterialTheme.dimens.spacing.medium)
     ) {
+        Spacer(modifier = Modifier.height(1.dp))
 
         Column(
-            modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
