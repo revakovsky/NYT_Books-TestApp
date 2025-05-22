@@ -64,12 +64,18 @@ class SignInViewModel(
         credentialManager?.let { manager ->
             when (val result = authClient.signIn(manager)) {
                 is Result.Error -> sendEvent(SignInEvent.AuthError(result.error.toUiText()))
-                is Result.Success -> sendEvent(SignInEvent.SignInSuccess)
+                is Result.Success -> getSignedInUser()
             }
-
         } ?: sendEvent(SignInEvent.AuthError(AuthError.Google.CREDENTIAL_FETCH_FAILED.toUiText()))
 
         updateState { it.copy(isSigningIn = false) }
+    }
+
+    private fun getSignedInUser() {
+        authClient.getSignedInUser()?.let { user ->
+            // Here we can save signed in user data into the db
+            sendEvent(SignInEvent.SignInSuccess)
+        } ?: sendEvent(SignInEvent.AuthError(AuthError.Google.CREDENTIAL_FETCH_FAILED.toUiText()))
     }
 
     private fun forceSignOut(manager: GoogleCredentialManager) {
