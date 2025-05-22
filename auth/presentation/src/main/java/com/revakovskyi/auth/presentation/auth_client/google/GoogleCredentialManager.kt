@@ -1,7 +1,6 @@
 package com.revakovskyi.auth.presentation.auth_client.google
 
 import android.app.Activity
-import android.content.Context
 import android.util.Log
 import androidx.credentials.ClearCredentialStateRequest
 import androidx.credentials.Credential
@@ -21,21 +20,21 @@ import com.revakovskyi.core.domain.util.successfulResult
 import kotlinx.coroutines.CancellationException
 
 interface GoogleCredentialManager {
-    suspend fun getAuthCredential(activity: Activity): Result<AuthCredential, AuthError>
+    suspend fun getAuthCredential(): Result<AuthCredential, AuthError>
     suspend fun clear(): EmptyDataResult<AuthError>
 }
 
 
-internal class GoogleCredentialManagerImpl(
-    private val context: Context,
+class GoogleCredentialManagerImpl(
+    private val activity: Activity,
 ) : GoogleCredentialManager {
 
     private val tag = "GoogleCredentialManagerImpl"
 
-    private val credentialManager = CredentialManager.create(context)
+    private val credentialManager = CredentialManager.create(activity)
 
 
-    override suspend fun getAuthCredential(activity: Activity): Result<AuthCredential, AuthError> {
+    override suspend fun getAuthCredential(): Result<AuthCredential, AuthError> {
         val request: GetCredentialRequest = buildCredentialRequest()
 
         return try {
@@ -71,7 +70,7 @@ internal class GoogleCredentialManagerImpl(
 
     private fun buildCredentialRequest(): GetCredentialRequest {
         val googleIdOption = GetGoogleIdOption.Builder()
-            .setServerClientId(context.getString(R.string.web_client_id))
+            .setServerClientId(activity.getString(R.string.web_client_id))
             .setFilterByAuthorizedAccounts(false)
             .setAutoSelectEnabled(false)
             .build()

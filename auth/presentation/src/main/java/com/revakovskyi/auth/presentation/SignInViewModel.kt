@@ -1,9 +1,10 @@
 package com.revakovskyi.auth.presentation
 
-import android.app.Activity
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.revakovskyi.auth.presentation.auth_client.AuthClient
+import com.revakovskyi.auth.presentation.auth_client.google.GoogleCredentialManager
+import com.revakovskyi.core.domain.auth.AuthError
 import com.revakovskyi.core.domain.connectivity.ConnectivityObserver
 import com.revakovskyi.core.domain.connectivity.InternetStatus
 import com.revakovskyi.core.domain.util.Result
@@ -18,46 +19,66 @@ class SignInViewModel(
     private val authClient: AuthClient,
 ) : BaseViewModel<SignInState, SignInAction, SignInEvent>(SignInState()) {
 
+    private var credentialManager: GoogleCredentialManager? = null
+
 
     init {
         val forceSignOut = savedStateHandle["forceSignOut"] ?: false
-        if (forceSignOut) forceSignOut()
+        if (forceSignOut) {
+            sendEvent(SignInEvent.RequestCredentialManager)
+        }
     }
 
 
     override fun onAction(action: SignInAction) {
         when (action) {
-            is SignInAction.SignInWithGoogle -> checkConnection(action.activity)
+            is SignInAction.InitGoogleCredentialManager -> initGoogleCredentialManager(action.manager)
+            is SignInAction.SignInWithGoogle -> checkConnection()
+            is SignInAction.ForceSignOut -> forceSignOut(action.manager)
         }
     }
 
-    private fun forceSignOut() {
+    private fun initGoogleCredentialManager(manager: GoogleCredentialManager) {
+        credentialManager = manager
+        updateState { it.copy(isCredentialManagerInitialized = true) }
+    }
+
+    private fun checkConnection() {
         viewModelScope.launch {
-            when (val result = authClient.signOut()) {
-                is Result.Error -> sendEvent(SignInEvent.SignInError(result.error.toUiText()))
+            when (val internetStatus = connectivityObserver.internetStatus.first()) {
+                InternetStatus.AVAILABLE, InternetStatus.LOSING -> signInWithGoogle()
+                else -> sendEvent(SignInEvent.AuthError(internetStatus.toUiText()))
+            }
+        }
+    }
+
+    private suspend fun signInWithGoogle() {
+        updateState { it.copy(isSigningIn = true) }
+
+        credentialManager?.let { manager ->
+            when (val result = authClient.signIn(manager)) {
+                is Result.Error -> sendEvent(SignInEvent.AuthError(result.error.toUiText()))
+                is Result.Success -> sendEvent(SignInEvent.SignInSuccess)
+            }
+
+        } ?: sendEvent(SignInEvent.AuthError(AuthError.Google.CREDENTIAL_FETCH_FAILED.toUiText()))
+
+        updateState { it.copy(isSigningIn = false) }
+    }
+
+    private fun forceSignOut(manager: GoogleCredentialManager) {
+        viewModelScope.launch {
+            when (val result = authClient.signOut(manager)) {
+                is Result.Error -> sendEvent(SignInEvent.AuthError(result.error.toUiText()))
                 is Result.Success -> sendEvent(SignInEvent.SignOutSuccess)
             }
         }
     }
 
-    private fun checkConnection(activity: Activity) {
-        viewModelScope.launch {
-            when (val internetStatus = connectivityObserver.internetStatus.first()) {
-                InternetStatus.AVAILABLE, InternetStatus.LOSING -> signInWithGoogle(activity)
-                else -> sendEvent(SignInEvent.SignInError(internetStatus.toUiText()))
-            }
-        }
-    }
 
-    private suspend fun signInWithGoogle(activity: Activity) {
-        updateState { it.copy(isLoading = true) }
-
-        when (val result = authClient.signIn(activity)) {
-            is Result.Error -> sendEvent(SignInEvent.SignInError(result.error.toUiText()))
-            is Result.Success -> sendEvent(SignInEvent.SignInSuccess)
-        }
-
-        updateState { it.copy(isLoading = false) }
+    override fun onCleared() {
+        credentialManager = null
+        super.onCleared()
     }
 
 }

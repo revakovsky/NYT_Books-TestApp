@@ -1,7 +1,7 @@
 package com.revakovskyi.auth.presentation.auth_client
 
-import android.app.Activity
 import com.revakovskyi.auth.presentation.auth_client.google.GoogleAuthClient
+import com.revakovskyi.auth.presentation.auth_client.google.GoogleCredentialManager
 import com.revakovskyi.core.domain.auth.AuthError
 import com.revakovskyi.core.domain.auth.User
 import com.revakovskyi.core.domain.util.EmptyDataResult
@@ -9,8 +9,8 @@ import com.revakovskyi.core.domain.util.EmptyDataResult
 interface AuthClient {
     fun isSignedIn(): Boolean
     fun getSignedInUser(): User?
-    suspend fun signIn(activity: Activity): EmptyDataResult<AuthError>
-    suspend fun signOut(): EmptyDataResult<AuthError>
+    suspend fun signIn(manager: GoogleCredentialManager): EmptyDataResult<AuthError>
+    suspend fun signOut(manager: GoogleCredentialManager): EmptyDataResult<AuthError>
 }
 
 
@@ -26,12 +26,12 @@ internal class AppAuthClient(
         return googleAuthClient.getSignedInUser()
     }
 
-    override suspend fun signIn(activity: Activity): EmptyDataResult<AuthError> {
-        return googleAuthClient.signIn(activity)
+    override suspend fun signIn(manager: GoogleCredentialManager): EmptyDataResult<AuthError> {
+        return googleAuthClient.signIn(manager)
     }
 
-    override suspend fun signOut(): EmptyDataResult<AuthError> {
-        return googleAuthClient.signOut()
+    override suspend fun signOut(manager: GoogleCredentialManager): EmptyDataResult<AuthError> {
+        return googleAuthClient.signOut(manager)
     }
 
 }

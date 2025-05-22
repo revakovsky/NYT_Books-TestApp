@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,6 +23,7 @@ import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.revakovskyi.auth.presentation.auth_client.google.GoogleCredentialManagerImpl
 import com.revakovskyi.auth.presentation.components.GoogleButton
 import com.revakovskyi.core.presentation.theme.NYTBooksTheme
 import com.revakovskyi.core.presentation.theme.dimens
@@ -36,8 +38,20 @@ fun SignInScreenRoot(
     onSuccessfulSignIn: () -> Unit,
 ) {
     val context = LocalContext.current
+    val activity = LocalActivity.current
+
     val state by viewModel.state.collectAsStateWithLifecycle()
 
+
+    LaunchedEffect(Unit) {
+        if (!state.isCredentialManagerInitialized) {
+            activity?.let {
+                viewModel.onAction(
+                    SignInAction.InitGoogleCredentialManager(GoogleCredentialManagerImpl(it))
+                )
+            }
+        }
+    }
 
     ObserveSingleEvent(viewModel.event) { event ->
         when (event) {
@@ -54,7 +68,15 @@ fun SignInScreenRoot(
                 )
             }
 
-            is SignInEvent.SignInError -> {
+            SignInEvent.RequestCredentialManager -> {
+                activity?.let {
+                    viewModel.onAction(
+                        SignInAction.ForceSignOut(GoogleCredentialManagerImpl(it))
+                    )
+                }
+            }
+
+            is SignInEvent.AuthError -> {
                 SnackBarController.sendEvent(
                     SnackBarEvent(message = event.message.asString(context))
                 )
@@ -75,7 +97,6 @@ private fun SignInScreen(
     state: SignInState,
     onAction: (action: SignInAction) -> Unit,
 ) {
-    val activity = LocalActivity.current
 
     Column(
         modifier = Modifier
@@ -117,10 +138,8 @@ private fun SignInScreen(
         }
 
         GoogleButton(
-            loading = state.isLoading,
-            onClick = {
-                activity?.let { onAction(SignInAction.SignInWithGoogle(it)) }
-            },
+            loading = state.isSigningIn,
+            onClick = { onAction(SignInAction.SignInWithGoogle) },
             modifier = Modifier
                 .padding(horizontal = MaterialTheme.dimens.spacing.medium)
                 .padding(bottom = MaterialTheme.dimens.spacing.extraLarge)

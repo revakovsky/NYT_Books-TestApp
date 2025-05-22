@@ -1,6 +1,5 @@
 package com.revakovskyi.auth.presentation.auth_client.google
 
-import android.app.Activity
 import com.revakovskyi.auth.presentation.auth_client.firebase.FirebaseAuthenticator
 import com.revakovskyi.core.domain.auth.AuthError
 import com.revakovskyi.core.domain.auth.User
@@ -12,13 +11,12 @@ import com.revakovskyi.core.domain.util.successfulResult
 interface GoogleAuthClient {
     fun isSignedIn(): Boolean
     fun getSignedInUser(): User?
-    suspend fun signIn(activity: Activity): EmptyDataResult<AuthError>
-    suspend fun signOut(): EmptyDataResult<AuthError>
+    suspend fun signIn(manager: GoogleCredentialManager): EmptyDataResult<AuthError>
+    suspend fun signOut(manager: GoogleCredentialManager): EmptyDataResult<AuthError>
 }
 
 
 internal class GoogleAuthClientImpl(
-    private val credentialManager: GoogleCredentialManager,
     private val firebaseAuthenticator: FirebaseAuthenticator,
 ) : GoogleAuthClient {
 
@@ -27,10 +25,10 @@ internal class GoogleAuthClientImpl(
 
     override fun getSignedInUser(): User? = firebaseAuthenticator.getUser()
 
-    override suspend fun signIn(activity: Activity): EmptyDataResult<AuthError> {
+    override suspend fun signIn(manager: GoogleCredentialManager): EmptyDataResult<AuthError> {
         if (isSignedIn()) return successfulResult()
 
-        return when (val result = credentialManager.getAuthCredential(activity)) {
+        return when (val result = manager.getAuthCredential()) {
             is Result.Error -> result.asEmptyDataResult()
             is Result.Success -> {
                 val authCredential = result.data
@@ -39,8 +37,8 @@ internal class GoogleAuthClientImpl(
         }
     }
 
-    override suspend fun signOut(): EmptyDataResult<AuthError> {
-        return when (val result = credentialManager.clear()) {
+    override suspend fun signOut(manager: GoogleCredentialManager): EmptyDataResult<AuthError> {
+        return when (val result = manager.clear()) {
             is Result.Error -> result.asEmptyDataResult()
             is Result.Success -> {
                 firebaseAuthenticator.signOut()

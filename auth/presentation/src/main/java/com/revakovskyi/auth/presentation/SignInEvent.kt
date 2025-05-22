@@ -6,6 +6,7 @@ sealed interface SignInEvent {
 
     data object SignInSuccess : SignInEvent
     data object SignOutSuccess : SignInEvent
-    data class SignInError(val message: UiText) : SignInEvent
+    data object RequestCredentialManager : SignInEvent
+    data class AuthError(val message: UiText) : SignInEvent
 
 }

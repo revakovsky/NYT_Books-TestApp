@@ -1,9 +1,11 @@
 package com.revakovskyi.auth.presentation
 
-import android.app.Activity
+import com.revakovskyi.auth.presentation.auth_client.google.GoogleCredentialManager
 
 sealed interface SignInAction {
 
-    data class SignInWithGoogle(val activity: Activity) : SignInAction
+    data object SignInWithGoogle : SignInAction
+    data class InitGoogleCredentialManager(val manager: GoogleCredentialManager) : SignInAction
+    data class ForceSignOut(val manager: GoogleCredentialManager) : SignInAction
 
 }
