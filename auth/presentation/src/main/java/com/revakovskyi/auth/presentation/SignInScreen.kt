@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.revakovskyi.auth.presentation.auth_client.google.GoogleCredentialManagerImpl
 import com.revakovskyi.auth.presentation.components.GoogleButton
+import com.revakovskyi.core.domain.auth.AuthProvider
 import com.revakovskyi.core.presentation.theme.NYTBooksTheme
 import com.revakovskyi.core.presentation.theme.dimens
 import com.revakovskyi.core.presentation.utils.ObserveSingleEvent
@@ -139,7 +140,7 @@ private fun SignInScreen(
 
         GoogleButton(
             loading = state.isSigningIn,
-            onClick = { onAction(SignInAction.SignInWithGoogle) },
+            onClick = { onAction(SignInAction.SignIn(AuthProvider.GOOGLE)) },
             modifier = Modifier
                 .padding(horizontal = MaterialTheme.dimens.spacing.medium)
                 .padding(bottom = MaterialTheme.dimens.spacing.extraLarge)

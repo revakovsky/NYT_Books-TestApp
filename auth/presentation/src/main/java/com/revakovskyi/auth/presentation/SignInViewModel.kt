@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.revakovskyi.auth.presentation.auth_client.AuthClient
 import com.revakovskyi.auth.presentation.auth_client.google.GoogleCredentialManager
 import com.revakovskyi.core.domain.auth.AuthError
+import com.revakovskyi.core.domain.auth.AuthProvider
 import com.revakovskyi.core.domain.connectivity.ConnectivityObserver
 import com.revakovskyi.core.domain.connectivity.InternetStatus
 import com.revakovskyi.core.domain.util.Result
@@ -33,7 +34,7 @@ class SignInViewModel(
     override fun onAction(action: SignInAction) {
         when (action) {
             is SignInAction.InitGoogleCredentialManager -> initGoogleCredentialManager(action.manager)
-            is SignInAction.SignInWithGoogle -> checkConnection()
+            is SignInAction.SignIn -> checkConnection(action.authProvider)
             is SignInAction.ForceSignOut -> forceSignOut(action.manager)
         }
     }
@@ -43,10 +44,15 @@ class SignInViewModel(
         updateState { it.copy(isCredentialManagerInitialized = true) }
     }
 
-    private fun checkConnection() {
+    private fun checkConnection(authProvider: AuthProvider) {
         viewModelScope.launch {
             when (val internetStatus = connectivityObserver.internetStatus.first()) {
-                InternetStatus.AVAILABLE, InternetStatus.LOSING -> signInWithGoogle()
+                InternetStatus.AVAILABLE, InternetStatus.LOSING -> {
+                    when (authProvider) {
+                        AuthProvider.GOOGLE -> signInWithGoogle()
+                    }
+                }
+
                 else -> sendEvent(SignInEvent.AuthError(internetStatus.toUiText()))
             }
         }
