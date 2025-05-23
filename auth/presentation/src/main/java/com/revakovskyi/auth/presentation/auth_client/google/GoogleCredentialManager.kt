@@ -19,12 +19,20 @@ import com.revakovskyi.core.domain.utils.successfulResult
 import kotlinx.coroutines.CancellationException
 import timber.log.Timber
 
+/**
+ * Abstraction for acquiring and clearing Google credentials via the Credential Manager API.
+ */
 interface GoogleCredentialManager {
     suspend fun getAuthCredential(): Result<AuthCredential, AuthError>
     suspend fun clear(): EmptyDataResult<AuthError>
 }
 
 
+/**
+ * Default implementation of [GoogleCredentialManager] using the Credential Manager API.
+ *
+ * @param activity The activity used to launch the Google sign-in UI.
+ */
 class GoogleCredentialManagerImpl(
     private val activity: Activity,
 ) : GoogleCredentialManager {

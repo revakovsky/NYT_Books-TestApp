@@ -8,6 +8,9 @@ import com.revakovskyi.core.domain.utils.Result
 import com.revakovskyi.core.domain.utils.asEmptyDataResult
 import com.revakovskyi.core.domain.utils.successfulResult
 
+/**
+ * Interface for handling authentication via Google, including sign-in and sign-out flows.
+ */
 interface GoogleAuthClient {
     fun isSignedIn(): Boolean
     fun getSignedInUser(): User?
@@ -16,6 +19,10 @@ interface GoogleAuthClient {
 }
 
 
+/**
+ * Default implementation of [GoogleAuthClient] that handles sign-in/sign-out using
+ * Firebase Authentication and Google Credential Manager.
+ */
 internal class GoogleAuthClientImpl(
     private val firebaseAuthenticator: FirebaseAuthenticator,
 ) : GoogleAuthClient {

@@ -16,6 +16,9 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
+/**
+ * Interface for interacting with Firebase Authentication.
+ */
 interface FirebaseAuthenticator {
     fun isSignedIn(): Boolean
     fun getUser(): User?
@@ -24,6 +27,11 @@ interface FirebaseAuthenticator {
 }
 
 
+/**
+ * Default implementation of [FirebaseAuthenticator] that handles Firebase user sessions.
+ *
+ * @param dispatcherProvider Dispatcher for offloading Firebase tasks to background threads.
+ */
 internal class FirebaseAuthenticatorImpl(
     private val dispatcherProvider: DispatcherProvider,
 ) : FirebaseAuthenticator {

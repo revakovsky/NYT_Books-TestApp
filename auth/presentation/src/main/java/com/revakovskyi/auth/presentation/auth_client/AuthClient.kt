@@ -6,6 +6,12 @@ import com.revakovskyi.core.domain.auth.AuthError
 import com.revakovskyi.core.domain.auth.User
 import com.revakovskyi.core.domain.utils.EmptyDataResult
 
+/**
+ * Interface for managing high-level authentication operations within the app.
+ *
+ * Abstracts the authentication mechanism (e.g., Google, Email/Password) to allow
+ * interchangeable implementations.
+ */
 interface AuthClient {
     fun isSignedIn(): Boolean
     fun getSignedInUser(): User?
@@ -14,6 +20,9 @@ interface AuthClient {
 }
 
 
+/**
+ * Default implementation of [AuthClient] that delegates to [GoogleAuthClient].
+ */
 internal class AppAuthClient(
     private val googleAuthClient: GoogleAuthClient,
 ) : AuthClient {
