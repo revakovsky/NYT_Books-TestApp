@@ -4,20 +4,20 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-internal data class BooksOverviewDto(
+data class BooksOverviewDto(
     @SerialName("results") val results: BooksOverviewResults,
 )
 
 
 @Serializable
-internal data class BooksOverviewResults(
+data class BooksOverviewResults(
     @SerialName("published_date") val publishedDate: String,
     @SerialName("lists") val categories: List<CategoryDto>,
 )
 
 
 @Serializable
-internal data class CategoryDto(
+data class CategoryDto(
     @SerialName("display_name") val name: String,
     @SerialName("updated") val updatingFrequency: String,
     @SerialName("books") val books: List<BookDto>,
@@ -25,7 +25,7 @@ internal data class CategoryDto(
 
 
 @Serializable
-internal data class BookDto(
+data class BookDto(
     @SerialName("title") val title: String,
     @SerialName("author") val author: String,
     @SerialName("description") val description: String,
@@ -37,7 +37,7 @@ internal data class BookDto(
 
 
 @Serializable
-internal data class StoreDto(
+data class StoreDto(
     @SerialName("name") val name: String,
     @SerialName("url") val url: String,
 )

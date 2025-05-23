@@ -25,7 +25,7 @@ import kotlinx.serialization.SerializationException
  * @param execute A lambda that executes the network call and returns an [HttpResponse].
  * @return A [Result] containing either the parsed response body or a network error.
  */
-suspend inline fun <reified T> safeNetworkCall(
+internal suspend inline fun <reified T> safeNetworkCall(
     dispatcher: CoroutineDispatcher,
     noinline execute: suspend () -> HttpResponse,
 ): Result<T, DataError.Network> {
@@ -56,7 +56,7 @@ suspend inline fun <reified T> safeNetworkCall(
  * @param response The [HttpResponse] to process.
  * @return A [Result] containing either the parsed response body or a network error.
  */
-suspend inline fun <reified T> responseToResult(response: HttpResponse): Result<T, DataError.Network> {
+internal suspend inline fun <reified T> responseToResult(response: HttpResponse): Result<T, DataError.Network> {
     return when (response.status.value) {
         in 200..299 -> Result.Success(response.body<T>())
         401 -> Result.Error(DataError.Network.UNAUTHORIZED)
@@ -79,7 +79,7 @@ suspend inline fun <reified T> responseToResult(response: HttpResponse): Result<
  * @param queryParameters A map of query parameters to include in the request.
  * @return A [Result] containing either the parsed response body or a network error.
  */
-suspend inline fun <reified Response : Any> HttpClient.get(
+internal suspend inline fun <reified Response : Any> HttpClient.get(
     dispatcher: CoroutineDispatcher,
     route: String,
     queryParameters: Map<String, Any?> = mapOf(),
@@ -105,7 +105,7 @@ suspend inline fun <reified Response : Any> HttpClient.get(
  * @param route The relative or full URL.
  * @return The constructed full URL as a [String].
  */
-fun constructRoute(route: String): String {
+internal fun constructRoute(route: String): String {
     return when {
         route.contains(BuildConfig.BASE_URL) -> route
         route.startsWith("/") -> BuildConfig.BASE_URL + route

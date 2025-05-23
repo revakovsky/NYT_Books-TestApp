@@ -4,6 +4,7 @@ import android.app.Application
 import com.revakovskyi.auth.presentation.di.authPresentationModule
 import com.revakovskyi.books.presentation.di.booksPresentationModule
 import com.revakovskyi.core.data.di.coreDataModule
+import com.revakovskyi.core.network.di.coreNetworkModule
 import com.revakovskyi.nytbooks.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -24,7 +25,7 @@ class App : Application() {
             modules(
                 listOf(
                     appModule,
-                    coreDataModule,
+                    coreDataModule, coreNetworkModule,
                     authPresentationModule,
                     booksPresentationModule,
                 )

@@ -15,4 +15,7 @@ dependencies {
     //Koin
     implementation(project.libs.bundles.koin)
 
+    //Timber
+    implementation(project.libs.timber)
+
 }
