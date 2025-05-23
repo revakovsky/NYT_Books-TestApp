@@ -8,10 +8,10 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.revakovskyi.core.domain.auth.AuthError
 import com.revakovskyi.core.domain.auth.User
-import com.revakovskyi.core.domain.util.DispatcherProvider
-import com.revakovskyi.core.domain.util.EmptyDataResult
-import com.revakovskyi.core.domain.util.Result
-import com.revakovskyi.core.domain.util.successfulResult
+import com.revakovskyi.core.domain.utils.DispatcherProvider
+import com.revakovskyi.core.domain.utils.EmptyDataResult
+import com.revakovskyi.core.domain.utils.Result
+import com.revakovskyi.core.domain.utils.successfulResult
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext

@@ -1,4 +1,4 @@
-package com.revakovskyi.core.domain.util
+package com.revakovskyi.core.domain.utils
 
 import kotlinx.coroutines.CoroutineDispatcher
 

@@ -1,6 +1,6 @@
 package com.revakovskyi.core.domain.auth
 
-import com.revakovskyi.core.domain.util.Error
+import com.revakovskyi.core.domain.utils.Error
 
 sealed interface AuthError : Error {
 

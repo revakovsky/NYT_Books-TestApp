@@ -4,7 +4,7 @@ import com.revakovskyi.auth.presentation.auth_client.google.GoogleAuthClient
 import com.revakovskyi.auth.presentation.auth_client.google.GoogleCredentialManager
 import com.revakovskyi.core.domain.auth.AuthError
 import com.revakovskyi.core.domain.auth.User
-import com.revakovskyi.core.domain.util.EmptyDataResult
+import com.revakovskyi.core.domain.utils.EmptyDataResult
 
 interface AuthClient {
     fun isSignedIn(): Boolean

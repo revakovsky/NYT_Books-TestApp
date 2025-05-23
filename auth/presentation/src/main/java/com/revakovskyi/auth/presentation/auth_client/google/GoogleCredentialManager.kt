@@ -14,9 +14,9 @@ import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.GoogleAuthProvider
 import com.revakovskyi.auth.presentation.R
 import com.revakovskyi.core.domain.auth.AuthError
-import com.revakovskyi.core.domain.util.EmptyDataResult
-import com.revakovskyi.core.domain.util.Result
-import com.revakovskyi.core.domain.util.successfulResult
+import com.revakovskyi.core.domain.utils.EmptyDataResult
+import com.revakovskyi.core.domain.utils.Result
+import com.revakovskyi.core.domain.utils.successfulResult
 import kotlinx.coroutines.CancellationException
 
 interface GoogleCredentialManager {

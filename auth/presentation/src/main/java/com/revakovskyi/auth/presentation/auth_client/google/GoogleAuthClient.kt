@@ -3,10 +3,10 @@ package com.revakovskyi.auth.presentation.auth_client.google
 import com.revakovskyi.auth.presentation.auth_client.firebase.FirebaseAuthenticator
 import com.revakovskyi.core.domain.auth.AuthError
 import com.revakovskyi.core.domain.auth.User
-import com.revakovskyi.core.domain.util.EmptyDataResult
-import com.revakovskyi.core.domain.util.Result
-import com.revakovskyi.core.domain.util.asEmptyDataResult
-import com.revakovskyi.core.domain.util.successfulResult
+import com.revakovskyi.core.domain.utils.EmptyDataResult
+import com.revakovskyi.core.domain.utils.Result
+import com.revakovskyi.core.domain.utils.asEmptyDataResult
+import com.revakovskyi.core.domain.utils.successfulResult
 
 interface GoogleAuthClient {
     fun isSignedIn(): Boolean

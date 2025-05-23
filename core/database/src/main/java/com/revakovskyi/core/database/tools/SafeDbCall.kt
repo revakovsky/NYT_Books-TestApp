@@ -2,8 +2,8 @@ package com.revakovskyi.core.database.tools
 
 import android.database.sqlite.SQLiteFullException
 import android.util.Log
-import com.revakovskyi.core.domain.books.DataError
-import com.revakovskyi.core.domain.util.Result
+import com.revakovskyi.core.domain.utils.DataError
+import com.revakovskyi.core.domain.utils.Result
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.cancellation.CancellationException

@@ -1,6 +1,4 @@
-package com.revakovskyi.core.domain.books
-
-import com.revakovskyi.core.domain.util.Error
+package com.revakovskyi.core.domain.utils
 
 sealed interface DataError : Error {
 
