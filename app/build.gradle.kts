@@ -46,4 +46,7 @@ dependencies {
     // Firebase
     implementation(platform(libs.firebase.bom))
 
+    //Timber
+    implementation(project.libs.timber)
+
 }

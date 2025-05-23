@@ -1,6 +1,5 @@
 package com.revakovskyi.core.network.tools
 
-import android.util.Log
 import com.revakovskyi.core.domain.utils.DataError
 import com.revakovskyi.core.domain.utils.Result
 import com.revakovskyi.core.network.BuildConfig
@@ -15,6 +14,7 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.SerializationException
+import timber.log.Timber
 
 /**
  * Executes a network call safely, converting exceptions into [Result] errors.
@@ -33,13 +33,13 @@ internal suspend inline fun <reified T> safeNetworkCall(
         try {
             responseToResult(execute())
         } catch (e: UnresolvedAddressException) {
-            Log.e("SafeNetworkCall", "No internet", e)
+            Timber.e(e, "No internet")
             Result.Error(DataError.Network.NO_INTERNET)
         } catch (e: SerializationException) {
-            Log.e("SafeNetworkCall", "Serialization error", e)
+            Timber.e(e, "Serialization error")
             Result.Error(DataError.Network.SERIALIZATION)
         } catch (e: Exception) {
-            Log.e("SafeNetworkCall", "Unknown network error", e)
+            Timber.e(e, "Unknown network error")
             if (e is CancellationException) throw e
             Result.Error(DataError.Network.UNKNOWN)
         }

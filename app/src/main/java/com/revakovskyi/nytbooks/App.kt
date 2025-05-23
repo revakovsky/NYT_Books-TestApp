@@ -6,6 +6,7 @@ import com.revakovskyi.books.presentation.di.booksPresentationModule
 import com.revakovskyi.core.data.di.coreDataModule
 import com.revakovskyi.core.network.di.coreNetworkModule
 import com.revakovskyi.nytbooks.di.appModule
+import com.revakovskyi.nytbooks.utils.DefaultLogger
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -16,6 +17,7 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         setUpKoin()
+        DefaultLogger.init(isDebug = BuildConfig.DEBUG, defaultTag = "NYT_Books")
     }
 
     private fun setUpKoin() {

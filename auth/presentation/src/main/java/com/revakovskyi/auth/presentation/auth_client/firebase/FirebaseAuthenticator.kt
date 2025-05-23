@@ -1,6 +1,5 @@
 package com.revakovskyi.auth.presentation.auth_client.firebase
 
-import android.util.Log
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
@@ -15,6 +14,7 @@ import com.revakovskyi.core.domain.utils.successfulResult
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 interface FirebaseAuthenticator {
     fun isSignedIn(): Boolean
@@ -27,8 +27,6 @@ interface FirebaseAuthenticator {
 internal class FirebaseAuthenticatorImpl(
     private val dispatcherProvider: DispatcherProvider,
 ) : FirebaseAuthenticator {
-
-    private val tag = "FirebaseAuthenticatorImpl"
 
     private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
@@ -53,19 +51,19 @@ internal class FirebaseAuthenticatorImpl(
                 else Result.Error(AuthError.Firebase.UNKNOWN)
 
             } catch (e: FirebaseAuthInvalidUserException) {
-                Log.e(tag, "Sign-in failed: invalid user", e)
+                Timber.e(e, "Sign-in failed: invalid user")
                 Result.Error(AuthError.Firebase.INVALID_USER)
 
             } catch (e: FirebaseAuthInvalidCredentialsException) {
-                Log.e(tag, "Sign-in failed: invalid credentials", e)
+                Timber.e(e, "Sign-in failed: invalid credentials")
                 Result.Error(AuthError.Firebase.INVALID_CREDENTIALS)
 
             } catch (e: FirebaseAuthUserCollisionException) {
-                Log.e(tag, "Sign-in failed: account collision", e)
+                Timber.e(e, "Sign-in failed: account collision")
                 Result.Error(AuthError.Firebase.ACCOUNT_COLLISION)
 
             } catch (e: Exception) {
-                Log.e(tag, "Sign-in failed: unknown error", e)
+                Timber.e(e, "Sign-in failed: unknown error")
                 if (e is CancellationException) throw e
                 Result.Error(AuthError.Firebase.UNKNOWN)
             }
