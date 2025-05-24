@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.revakovskyi.core.presentation.theme.dimens
 
 @Composable
-fun AppButton(
+fun DefaultButton(
     modifier: Modifier = Modifier,
     text: String,
     width: Dp = 100.dp,

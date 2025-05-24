@@ -19,7 +19,7 @@ import timber.log.Timber
 /**
  * Interface for interacting with Firebase Authentication.
  */
-interface FirebaseAuthenticator {
+internal interface FirebaseAuthenticator {
     fun isSignedIn(): Boolean
     fun getUser(): User?
     suspend fun signInWithGoogleAuthCredential(credential: AuthCredential): EmptyDataResult<AuthError>

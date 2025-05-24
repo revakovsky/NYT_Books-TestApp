@@ -31,7 +31,7 @@ import kotlin.coroutines.cancellation.CancellationException
  *
  * @return A [Result] containing either the result of the operation or a [DataError.Local] error.
  */
-suspend inline fun <T> safeDbCall(
+internal suspend inline fun <T> safeDbCall(
     dispatcher: CoroutineDispatcher,
     crossinline action: suspend () -> T,
 ): Result<T, DataError.Local> {

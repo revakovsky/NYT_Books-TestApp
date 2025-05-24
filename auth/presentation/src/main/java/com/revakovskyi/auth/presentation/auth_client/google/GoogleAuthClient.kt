@@ -11,7 +11,7 @@ import com.revakovskyi.core.domain.utils.successfulResult
 /**
  * Interface for handling authentication via Google, including sign-in and sign-out flows.
  */
-interface GoogleAuthClient {
+internal interface GoogleAuthClient {
     fun isSignedIn(): Boolean
     fun getSignedInUser(): User?
     suspend fun signIn(manager: GoogleCredentialManager): EmptyDataResult<AuthError>
