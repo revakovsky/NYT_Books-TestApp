@@ -27,6 +27,17 @@ If the network is unavailable, the app automatically falls back to data from the
 database.
 Users are notified of their connection status accordingly.
 
+### ⚠️ Firebase Configuration Required
+
+> **Important**  
+> To run the application successfully, you must provide a `google-services.json` file at the
+> following path:
+> ```
+> app/google-services.json
+> ```
+> This file is required for Firebase Authentication (Google Sign-In) to work.  
+> It is not included in the repository and must be added manually.
+
 ### Minimum Android Version:
 
 - Mobile app: Android 8.0 (API level 26)
@@ -42,28 +53,26 @@ Concerns.
 ### Tech Stack & Features
 
 - [Kotlin](https://kotlinlang.org/docs/android-overview.html#)
-- [Jetpack Compose](https://developer.android.com/develop/ui/compose/documentation)
-- [Material 3](https://developer.android.com/develop/ui/compose/designsystems/material3)
+- [Kotlin Coroutines](https://kotlinlang.org/docs/coroutines-overview.html#)
+- [Kotlin Flows](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/#)
 - [Multi-module project structure](https://developer.android.com/topic/modularization)
 - [Gradle Convention Plugin](https://docs.gradle.org/current/userguide/plugins.html)
 - [MVI Architecture](https://developer.android.com/topic/architecture)
+- [Jetpack Compose](https://developer.android.com/develop/ui/compose/documentation)
+- [Material 3](https://developer.android.com/develop/ui/compose/designsystems/material3)
 - [Nested Type-safe Jetpack Compose Navigation](https://developer.android.com/develop/ui/compose/navigation)
-- [Kotlin Coroutines](https://kotlinlang.org/docs/coroutines-overview.html#)
-- [Kotlin Flows](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/#)
-- [Android Splash Screen API](https://developer.android.com/develop/ui/views/launch/splash-screen)
-- [Firebase Authentication (Google Sign-In)](https://firebase.google.com/docs/auth/android/google-signin)
 - [Koin](https://insert-koin.io/docs/quickstart/android/)
 - [Ktor Client](https://ktor.io/docs/welcome.html)
 - [Room](https://developer.android.com/jetpack/androidx/releases/room)
 - [Coil](https://coil-kt.github.io/coil/)
-- [PullRefresh](https://developer.android.com/develop/ui/compose/components/pull-to-refresh)
-- [WebView](https://developer.android.com/develop/ui/views/layout/webapps/webview)
+- [Android Splash Screen API](https://developer.android.com/develop/ui/views/launch/splash-screen)
 - [Connectivity Manager](https://developer.android.com/training/monitoring-device-state/connectivity-status-type)
+- [Firebase Authentication (Google Sign-In)](https://firebase.google.com/docs/auth/android/google-signin)
+- [WebView](https://developer.android.com/develop/ui/views/layout/webapps/webview)
+- [PullRefresh](https://developer.android.com/develop/ui/compose/components/pull-to-refresh)
 
 ### Features and Functionality
 
-- Custom Result class to process Http requests and errors
-- Kotlin Flows to transfer data
 - Portrait / Landscape screen orientation support
 - Animated screen transitions
 - Light / Dark modes
