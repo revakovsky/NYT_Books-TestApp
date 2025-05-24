@@ -4,6 +4,7 @@ import android.app.Application
 import com.revakovskyi.auth.presentation.di.authPresentationModule
 import com.revakovskyi.books.presentation.di.booksPresentationModule
 import com.revakovskyi.core.data.di.coreDataModule
+import com.revakovskyi.core.database.di.coreDatabaseModule
 import com.revakovskyi.core.network.di.coreNetworkModule
 import com.revakovskyi.nytbooks.di.appModule
 import com.revakovskyi.nytbooks.utils.DefaultLogger
@@ -27,7 +28,7 @@ class App : Application() {
             modules(
                 listOf(
                     appModule,
-                    coreDataModule, coreNetworkModule,
+                    coreDataModule, coreNetworkModule, coreDatabaseModule,
                     authPresentationModule,
                     booksPresentationModule,
                 )
