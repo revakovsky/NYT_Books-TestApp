@@ -1,5 +1,6 @@
 package com.revakovskyi.books.presentation.categories
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,17 +17,24 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.revakovskyi.books.presentation.R
+import com.revakovskyi.core.presentation.design_system.DefaultButton
+import com.revakovskyi.core.presentation.design_system.DefaultDialog
+import com.revakovskyi.core.presentation.design_system.DefaultOutlinedButton
 import com.revakovskyi.core.presentation.design_system.DefaultScaffold
 import com.revakovskyi.core.presentation.design_system.DefaultToolbar
 import com.revakovskyi.core.presentation.design_system.util.DropDownItem
@@ -66,13 +74,15 @@ private fun CategoriesScreen(
     val topAppBarState = rememberTopAppBarState()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(state = topAppBarState)
 
+    var showSignOutDialog by rememberSaveable { mutableStateOf(false) }
+
     val signOutIcon = ImageVector.vectorResource(R.drawable.sign_out)
 
     val menuItems = remember {
         listOf(
             DropDownItem(
                 icon = signOutIcon,
-                title = context.getString(R.string.sign_out)
+                title = context.getString(R.string.sign_out_title)
             ),
         )
     }
@@ -93,7 +103,7 @@ private fun CategoriesScreen(
                 menuItems = menuItems,
                 onMenuItemClick = { itemIndex ->
                     when (itemIndex) {
-                        0 -> onAction(CategoriesAction.SignOut)
+                        0 -> showSignOutDialog = true
                         else -> Unit
                     }
                 }
@@ -127,6 +137,35 @@ private fun CategoriesScreen(
             }
         }
 
+    }
+
+
+    AnimatedVisibility(
+        label = "",
+        visible = showSignOutDialog
+    ) {
+        DefaultDialog(
+            title = stringResource(R.string.sign_out_title),
+            description = stringResource(R.string.sign_out_description),
+            onDismiss = { showSignOutDialog = false },
+            primaryButton = {
+                DefaultButton(
+                    modifier = Modifier.weight(1f),
+                    text = stringResource(R.string.stay),
+                    onClick = { showSignOutDialog = false }
+                )
+            },
+            secondaryButton = {
+                DefaultOutlinedButton(
+                    modifier = Modifier.weight(1f),
+                    text = stringResource(R.string.sign_out),
+                    onClick = {
+                        showSignOutDialog = false
+                        onAction(CategoriesAction.SignOut)
+                    }
+                )
+            },
+        )
     }
 
 }
