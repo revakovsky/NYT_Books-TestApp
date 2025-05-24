@@ -1,4 +1,4 @@
-package com.revakovskyi.core.data.books.mappers
+package com.revakovskyi.books.data.mappers
 
 import com.revakovskyi.core.database.entities.BookEntity
 import com.revakovskyi.core.database.entities.CategoryEntity
