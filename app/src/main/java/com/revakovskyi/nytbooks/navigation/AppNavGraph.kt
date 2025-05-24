@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
+import androidx.navigation.toRoute
 import com.revakovskyi.auth.presentation.SignInScreenRoot
 import com.revakovskyi.books.presentation.categories.CategoriesScreenRoot
 
@@ -57,6 +58,9 @@ private fun NavGraphBuilder.booksGraph(navController: NavHostController) {
 
         composable<Graph.Books.Destination.Categories> {
             CategoriesScreenRoot(
+                openBooksByCategory = { categoryName ->
+                    navController.navigate(Graph.Books.Destination.BookList(categoryName))
+                },
                 signOut = {
                     navController.navigate(Graph.Auth.Destination.SignIn(forceSignOut = true)) {
                         popUpTo<Graph.Books> { inclusive = true }
@@ -66,7 +70,8 @@ private fun NavGraphBuilder.booksGraph(navController: NavHostController) {
         }
 
         composable<Graph.Books.Destination.BookList> {
-            // TODO: add a BookList screen
+            val categoryName = it.toRoute<Graph.Books.Destination.BookList>().categoryName
+            // TODO: add a Store screen
         }
 
         composable<Graph.Books.Destination.Store> {

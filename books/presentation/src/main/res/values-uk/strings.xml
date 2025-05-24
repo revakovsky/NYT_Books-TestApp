@@ -5,4 +5,8 @@
     <string name="sign_out_description">Ви впевнені, що хочете вийти з акаунта?</string>
     <string name="stay">Залишитися</string>
     <string name="sign_out_confirm">Вийти</string>
+    <string name="published_date">Дата публікації: %1$s</string>
+    <string name="updates">Оновлення: %1$s</string>
+    <string name="weekly">Щотижня</string>
+    <string name="monthly">Щомісяця</string>
 </resources>

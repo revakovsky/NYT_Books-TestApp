@@ -1,18 +1,22 @@
+@file:OptIn(ExperimentalMaterialApi::class)
+
 package com.revakovskyi.books.presentation.categories
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
@@ -21,6 +25,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -31,6 +36,7 @@ import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.revakovskyi.books.presentation.R
+import com.revakovskyi.books.presentation.categories.components.CategoryItem
 import com.revakovskyi.core.presentation.design_system.DefaultButton
 import com.revakovskyi.core.presentation.design_system.DefaultDialog
 import com.revakovskyi.core.presentation.design_system.DefaultOutlinedButton
@@ -38,21 +44,31 @@ import com.revakovskyi.core.presentation.design_system.DefaultScaffold
 import com.revakovskyi.core.presentation.design_system.DefaultToolbar
 import com.revakovskyi.core.presentation.design_system.util.DropDownItem
 import com.revakovskyi.core.presentation.theme.NYTBooksTheme
-import com.revakovskyi.core.presentation.theme.dimens
 import com.revakovskyi.core.presentation.utils.ObserveSingleEvent
+import com.revakovskyi.core.presentation.utils.snack_bar.SnackBarController
+import com.revakovskyi.core.presentation.utils.snack_bar.SnackBarEvent
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun CategoriesScreenRoot(
     viewModel: CategoriesViewModel = koinViewModel(),
+    openBooksByCategory: (categoryName: String) -> Unit,
     signOut: () -> Unit,
 ) {
+    val context = LocalContext.current
     val state by viewModel.state.collectAsStateWithLifecycle()
 
 
     ObserveSingleEvent(viewModel.event) { event ->
         when (event) {
             CategoriesEvent.SignOut -> signOut()
+            is CategoriesEvent.DataError -> {
+                SnackBarController.sendEvent(
+                    SnackBarEvent(message = event.message.asString(context))
+                )
+            }
+
+            is CategoriesEvent.OpenBooksByCategory -> openBooksByCategory(event.categoryName)
         }
     }
 
@@ -73,6 +89,11 @@ private fun CategoriesScreen(
     val context = LocalContext.current
     val topAppBarState = rememberTopAppBarState()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(state = topAppBarState)
+
+    val pullRefreshState = rememberPullRefreshState(
+        refreshing = state.isLoading,
+        onRefresh = { onAction(CategoriesAction.ForceUpdateCategories) },
+    )
 
     var showSignOutDialog by rememberSaveable { mutableStateOf(false) }
 
@@ -111,30 +132,41 @@ private fun CategoriesScreen(
         },
     ) { paddingValues ->
 
-        val numbers = remember { (1..100).toList() }
-
-        LazyColumn(
-            state = rememberLazyListState(),
+        Box(
             modifier = Modifier
                 .fillMaxSize()
+                .pullRefresh(pullRefreshState)
                 .padding(paddingValues)
         ) {
-            items(numbers) { number ->
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(
-                            horizontal = MaterialTheme.dimens.spacing.medium,
-                            vertical = MaterialTheme.dimens.spacing.small,
-                        )
-                ) {
-                    Text(
-                        text = number.toString(),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onBackground
+
+            LazyColumn(
+                state = rememberLazyListState(),
+                modifier = Modifier.fillMaxSize()
+            ) {
+                itemsIndexed(
+                    items = state.categories,
+                    key = { _, it -> it.name }
+                ) { index, category ->
+
+                    CategoryItem(
+                        category = category,
+                        showDivider = index != state.categories.lastIndex,
+                        onCategoryClick = { categoryName ->
+                            onAction(CategoriesAction.OpenBooksByCategory(categoryName))
+                        }
                     )
+
                 }
             }
+
+            PullRefreshIndicator(
+                refreshing = state.isLoading,
+                state = pullRefreshState,
+                modifier = Modifier.align(Alignment.TopCenter),
+                backgroundColor = MaterialTheme.colorScheme.onBackground,
+                contentColor = MaterialTheme.colorScheme.background
+            )
+
         }
 
     }

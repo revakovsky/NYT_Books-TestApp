@@ -5,4 +5,8 @@
     <string name="sign_out_description">Are you sure you want to sign out?</string>
     <string name="stay">Stay</string>
     <string name="sign_out_confirm">Sign Out</string>
+    <string name="published_date">Published date: %1$s</string>
+    <string name="updates">Updates: %1$s</string>
+    <string name="weekly">Weekly</string>
+    <string name="monthly">Monthly</string>
 </resources>

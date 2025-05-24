@@ -15,7 +15,13 @@ dependencies {
     implementation(projects.core.presentation.utils)
     implementation(projects.core.presentation.designSystem)
 
-    //Koin
+    // Koin
     implementation(project.libs.bundles.koin)
+
+    // Pull Refresh
+    implementation(project.libs.compose.pullrefresh)
+
+    //Timber
+    implementation(project.libs.timber)
 
 }
