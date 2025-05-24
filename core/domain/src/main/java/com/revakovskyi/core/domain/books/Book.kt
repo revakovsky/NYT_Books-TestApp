@@ -2,6 +2,7 @@ package com.revakovskyi.core.domain.books
 
 data class Book(
     val id: Int,
+    val categoryName: String,
     val title: String,
     val author: String,
     val description: String,

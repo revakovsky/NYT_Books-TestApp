@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
 interface BooksNetworkClient {
-    fun getBooksOverview(): Flow<Result<BooksOverviewDto, DataError.Network>>
+    fun fetchBooksOverview(): Flow<Result<BooksOverviewDto, DataError.Network>>
 }
 
 
@@ -20,7 +20,7 @@ internal class KtorBooksNetworkClient(
     private val dispatcherProvider: DispatcherProvider,
 ) : BooksNetworkClient {
 
-    override fun getBooksOverview(): Flow<Result<BooksOverviewDto, DataError.Network>> = flow {
+    override fun fetchBooksOverview(): Flow<Result<BooksOverviewDto, DataError.Network>> = flow {
         val result = client.get<BooksOverviewDto>(
             dispatcher = dispatcherProvider.io,
             route = BOOKS_OVERVIEW_ROUTE,
