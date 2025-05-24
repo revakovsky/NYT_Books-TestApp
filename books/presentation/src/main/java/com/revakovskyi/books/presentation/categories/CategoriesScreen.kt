@@ -30,7 +30,6 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.revakovskyi.books.presentation.R
 import com.revakovskyi.core.presentation.design_system.DefaultButton
 import com.revakovskyi.core.presentation.design_system.DefaultDialog
@@ -41,10 +40,11 @@ import com.revakovskyi.core.presentation.design_system.util.DropDownItem
 import com.revakovskyi.core.presentation.theme.NYTBooksTheme
 import com.revakovskyi.core.presentation.theme.dimens
 import com.revakovskyi.core.presentation.utils.ObserveSingleEvent
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun CategoriesScreenRoot(
-    viewModel: CategoriesViewModel = viewModel(),
+    viewModel: CategoriesViewModel = koinViewModel(),
     signOut: () -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()

@@ -20,6 +20,7 @@ fun BooksOverviewDto.toBookEntities(): List<BookEntity> {
     return this.results.categories.flatMap { categoryDto ->
         categoryDto.books.map { bookDto ->
             BookEntity(
+                id = categoryDto.name + bookDto.title + bookDto.image,
                 categoryName = categoryDto.name,
                 title = bookDto.title,
                 author = bookDto.author,
@@ -39,7 +40,7 @@ fun BooksOverviewDto.toStoreEntities(): List<StoreEntity> {
             bookDto.stores.map { storeDto ->
                 StoreEntity(
                     name = storeDto.name,
-                    bookTitle = bookDto.title,
+                    bookId = categoryDto.name + bookDto.title + bookDto.image,
                     url = storeDto.url
                 )
             }

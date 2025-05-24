@@ -43,7 +43,7 @@ internal interface BooksDao {
     fun getBooksByCategory(categoryName: String): Flow<List<BookEntity>>
 
     @Query("SELECT * FROM stores_with_book WHERE book_id = :bookId")
-    fun getStoresWithBook(bookId: Int): Flow<List<StoreEntity>>
+    fun getStoresWithBook(bookId: String): Flow<List<StoreEntity>>
 
 
     @Query("DELETE FROM categories")

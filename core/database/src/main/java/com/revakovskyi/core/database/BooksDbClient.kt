@@ -19,9 +19,9 @@ interface BooksDbClient {
         stores: List<StoreEntity>,
     ): EmptyDataResult<DataError.Local>
 
-    suspend fun getBookCategories(): Flow<Result<List<CategoryEntity>, DataError.Local>>
-    suspend fun getBooksByCategory(categoryName: String): Flow<Result<List<BookEntity>, DataError.Local>>
-    suspend fun getStoresWithBook(bookId: Int): Flow<Result<List<StoreEntity>, DataError.Local>>
+    fun getBookCategories(): Flow<Result<List<CategoryEntity>, DataError.Local>>
+    fun getBooksByCategory(categoryName: String): Flow<Result<List<BookEntity>, DataError.Local>>
+    fun getStoresWithBook(bookId: String): Flow<Result<List<StoreEntity>, DataError.Local>>
 }
 
 
@@ -40,19 +40,19 @@ internal class BooksDbClientImpl(
         }
     }
 
-    override suspend fun getBookCategories(): Flow<Result<List<CategoryEntity>, DataError.Local>> {
+    override fun getBookCategories(): Flow<Result<List<CategoryEntity>, DataError.Local>> {
         return safeDbFlowCall(dispatcherProvider.io) {
             booksDao.getBookCategories()
         }
     }
 
-    override suspend fun getBooksByCategory(categoryName: String): Flow<Result<List<BookEntity>, DataError.Local>> {
+    override fun getBooksByCategory(categoryName: String): Flow<Result<List<BookEntity>, DataError.Local>> {
         return safeDbFlowCall(dispatcherProvider.io) {
             booksDao.getBooksByCategory(categoryName)
         }
     }
 
-    override suspend fun getStoresWithBook(bookId: Int): Flow<Result<List<StoreEntity>, DataError.Local>> {
+    override fun getStoresWithBook(bookId: String): Flow<Result<List<StoreEntity>, DataError.Local>> {
         return safeDbFlowCall(dispatcherProvider.io) {
             booksDao.getStoresWithBook(bookId)
         }

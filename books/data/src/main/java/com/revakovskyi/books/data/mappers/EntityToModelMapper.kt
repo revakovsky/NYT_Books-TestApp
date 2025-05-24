@@ -33,7 +33,7 @@ fun BookEntity.toBook(): Book {
 fun StoreEntity.toStore(): Store {
     return Store(
         name = name,
-        bookTitle = this.bookTitle,
+        bookTitle = this.bookId,
         url = this.url
     )
 }

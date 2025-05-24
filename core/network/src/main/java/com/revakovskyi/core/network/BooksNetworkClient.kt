@@ -6,12 +6,9 @@ import com.revakovskyi.core.domain.utils.Result
 import com.revakovskyi.core.network.dto.BooksOverviewDto
 import com.revakovskyi.core.network.tools.get
 import io.ktor.client.HttpClient
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
 
 interface BooksNetworkClient {
-    fun fetchBooksOverview(): Flow<Result<BooksOverviewDto, DataError.Network>>
+    suspend fun fetchBooksOverview(): Result<BooksOverviewDto, DataError.Network>
 }
 
 
@@ -20,14 +17,13 @@ internal class KtorBooksNetworkClient(
     private val dispatcherProvider: DispatcherProvider,
 ) : BooksNetworkClient {
 
-    override fun fetchBooksOverview(): Flow<Result<BooksOverviewDto, DataError.Network>> = flow {
-        val result = client.get<BooksOverviewDto>(
+    override suspend fun fetchBooksOverview(): Result<BooksOverviewDto, DataError.Network> {
+        return client.get<BooksOverviewDto>(
             dispatcher = dispatcherProvider.io,
             route = BOOKS_OVERVIEW_ROUTE,
             queryParameters = mapOf(API_KEY to BuildConfig.API_KEY)
         )
-        emit(result)
-    }.flowOn(dispatcherProvider.io)
+    }
 
 
     private companion object {

@@ -8,12 +8,12 @@ import androidx.room.PrimaryKey
 
 @Entity(
     tableName = "stores_with_book",
-    indices = [Index(value = ["book_title"])],
+    indices = [Index(value = ["book_id"])],
     foreignKeys = [
         ForeignKey(
             entity = BookEntity::class,
-            parentColumns = ["book_title"],
-            childColumns = ["book_title"],
+            parentColumns = ["book_id"],
+            childColumns = ["book_id"],
             onDelete = ForeignKey.CASCADE,
         )
     ]
@@ -21,7 +21,7 @@ import androidx.room.PrimaryKey
 data class StoreEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id") val id: Int = 0,
-    @ColumnInfo(name = "book_title") val bookTitle: String,
+    @ColumnInfo(name = "book_id") val bookId: String,
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "url") val url: String,
 )
