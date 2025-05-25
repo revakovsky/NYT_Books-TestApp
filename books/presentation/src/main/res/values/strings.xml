@@ -22,4 +22,5 @@
     <string name="image_is_not_available">Image for this book is not available</string>
     <string name="select_a_store">Select a store:</string>
     <string name="error_no_stores_found">No stores found for this book</string>
+    <string name="error_open_store_link">Failed to open the store link</string>
 </resources>

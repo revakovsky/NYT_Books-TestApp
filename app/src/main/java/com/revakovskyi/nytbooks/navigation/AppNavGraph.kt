@@ -8,7 +8,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
-import androidx.navigation.toRoute
 import com.revakovskyi.auth.presentation.SignInScreenRoot
 import com.revakovskyi.books.presentation.books_by_category.BooksScreenRoot
 import com.revakovskyi.books.presentation.categories.CategoriesScreenRoot
@@ -73,13 +72,7 @@ private fun NavGraphBuilder.booksGraph(navController: NavHostController) {
         composable<Graph.Books.Destination.BookList> {
             BooksScreenRoot(
                 backToCategories = { navController.navigateUp() },
-                openStore = { url -> navController.navigate(Graph.Books.Destination.Store(url)) }
             )
-        }
-
-        composable<Graph.Books.Destination.Store> {
-            val url = it.toRoute<Graph.Books.Destination.Store>().storeUrl
-
         }
 
     }

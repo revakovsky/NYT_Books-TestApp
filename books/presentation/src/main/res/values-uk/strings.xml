@@ -22,4 +22,5 @@
     <string name="image_is_not_available">Зображення для цієї книги недоступне</string>
     <string name="select_a_store">Оберіть магазин:</string>
     <string name="error_no_stores_found">Не знайдено жодного магазину для цієї книги</string>
+    <string name="error_open_store_link">Не вдалося відкрити посилання на магазин</string>
 </resources>

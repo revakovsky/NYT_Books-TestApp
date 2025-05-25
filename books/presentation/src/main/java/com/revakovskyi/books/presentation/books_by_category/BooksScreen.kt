@@ -12,6 +12,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
@@ -20,6 +21,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.revakovskyi.books.presentation.R
 import com.revakovskyi.books.presentation.books_by_category.components.BookItem
 import com.revakovskyi.books.presentation.books_by_category.components.StoresDialog
+import com.revakovskyi.books.presentation.store_client.ChromeTabsClient
 import com.revakovskyi.core.presentation.design_system.DefaultPullRefreshBox
 import com.revakovskyi.core.presentation.design_system.DefaultScaffold
 import com.revakovskyi.core.presentation.design_system.DefaultToolbar
@@ -27,22 +29,36 @@ import com.revakovskyi.core.presentation.theme.NYTBooksTheme
 import com.revakovskyi.core.presentation.utils.ObserveSingleEvent
 import com.revakovskyi.core.presentation.utils.snack_bar.SnackBarController
 import com.revakovskyi.core.presentation.utils.snack_bar.SnackBarEvent
+import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun BooksScreenRoot(
     viewModel: BooksViewModel = koinViewModel(),
     backToCategories: () -> Unit,
-    openStore: (url: String) -> Unit,
 ) {
     val context = LocalContext.current
+    val scope = rememberCoroutineScope()
     val state by viewModel.state.collectAsStateWithLifecycle()
 
 
     ObserveSingleEvent(viewModel.event) { event ->
         when (event) {
             BooksEvent.BackToCategories -> backToCategories()
-            is BooksEvent.OpenStore -> openStore(event.url)
+
+            is BooksEvent.OpenStore -> {
+                ChromeTabsClient.openStore(
+                    context = context,
+                    url = event.url,
+                    onError = {
+                        scope.launch {
+                            SnackBarController.sendEvent(
+                                SnackBarEvent(message = context.getString(R.string.error_open_store_link))
+                            )
+                        }
+                    }
+                )
+            }
 
             BooksEvent.SuccessfullyRefreshed -> {
                 SnackBarController.sendEvent(
