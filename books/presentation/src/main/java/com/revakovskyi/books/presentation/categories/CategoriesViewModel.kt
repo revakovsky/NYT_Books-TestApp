@@ -8,6 +8,7 @@ import com.revakovskyi.core.presentation.utils.base_viewmodel.BaseViewModel
 import com.revakovskyi.core.presentation.utils.text_converters.asUiText
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
 class CategoriesViewModel(
     private val booksRepository: BooksRepository,
@@ -52,7 +53,10 @@ class CategoriesViewModel(
     }
 
     private fun signOut() {
-        sendEvent(CategoriesEvent.SignOut)
+        viewModelScope.launch {
+            booksRepository.clearDb()
+            sendEvent(CategoriesEvent.SignOut)
+        }
     }
 
 }

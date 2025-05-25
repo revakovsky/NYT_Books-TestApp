@@ -18,7 +18,7 @@ internal interface BooksDao {
         books: List<BookEntity>,
         stores: List<StoreEntity>,
     ) {
-        clearBooksOverviewData()
+        clearAllBooksOverviewData()
 
         insertBooksCategories(categories)
         insertBooks(books)
@@ -45,8 +45,20 @@ internal interface BooksDao {
     @Query("SELECT * FROM stores_with_book WHERE book_id = :bookId")
     fun getStoresWithBook(bookId: String): Flow<List<StoreEntity>>
 
+    @Transaction
+    suspend fun clearAllBooksOverviewData() {
+        deleteStores()
+        deleteBooks()
+        deleteCategories()
+    }
+
+    @Query("DELETE FROM stores_with_book")
+    suspend fun deleteStores()
+
+    @Query("DELETE FROM books_by_category")
+    suspend fun deleteBooks()
 
     @Query("DELETE FROM categories")
-    suspend fun clearBooksOverviewData()
+    suspend fun deleteCategories()
 
 }

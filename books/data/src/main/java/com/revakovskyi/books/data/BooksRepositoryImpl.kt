@@ -62,6 +62,10 @@ class BooksRepositoryImpl(
         }
     }
 
+    override suspend fun clearDb(): EmptyDataResult<DataError.Local> {
+        return dbClient.clearDb()
+    }
+
     private fun forceLoadCategories(): Flow<Result<List<Category>, DataError>> = flow {
         when (val result = fetchAndCacheBooksOverview()) {
             is Result.Error -> emit(Result.Error(result.error))

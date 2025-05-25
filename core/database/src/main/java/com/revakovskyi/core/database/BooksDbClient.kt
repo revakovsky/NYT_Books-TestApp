@@ -22,6 +22,7 @@ interface BooksDbClient {
     fun getBookCategories(): Flow<Result<List<CategoryEntity>, DataError.Local>>
     fun getBooksByCategory(categoryName: String): Flow<Result<List<BookEntity>, DataError.Local>>
     fun getStoresWithBook(bookId: String): Flow<Result<List<StoreEntity>, DataError.Local>>
+    suspend fun clearDb(): EmptyDataResult<DataError.Local>
 }
 
 
@@ -55,6 +56,12 @@ internal class BooksDbClientImpl(
     override fun getStoresWithBook(bookId: String): Flow<Result<List<StoreEntity>, DataError.Local>> {
         return safeDbFlowCall(dispatcherProvider.io) {
             booksDao.getStoresWithBook(bookId)
+        }
+    }
+
+    override suspend fun clearDb(): EmptyDataResult<DataError.Local> {
+        return safeDbCall(dispatcherProvider.io) {
+            booksDao.clearAllBooksOverviewData()
         }
     }
 
