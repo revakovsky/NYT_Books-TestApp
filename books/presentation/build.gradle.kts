@@ -18,10 +18,13 @@ dependencies {
     // Koin
     implementation(project.libs.bundles.koin)
 
-    //Timber
-    implementation(project.libs.timber)
-
-    //Timber
+    // Coil
     implementation(project.libs.coil.compose)
+
+    // Android Custom Tabs
+    implementation(project.libs.androidx.browser)
+
+    // Timber
+    implementation(project.libs.timber)
 
 }

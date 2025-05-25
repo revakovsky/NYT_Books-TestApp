@@ -55,6 +55,9 @@ googleid = "1.1.1"
 # Timber
 timber = "5.0.1"
 
+# Android Custom Tabs
+browser = "1.8.0"
+
 # --------------------------------------------------------------------------------------------------
 
 
@@ -124,6 +127,9 @@ googleid = { module = "com.google.android.libraries.identity.googleid:googleid",
 
 # Timber
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
+
+# Android Custom Tabs
+androidx-browser = { module = "androidx.browser:browser", version.ref = "browser" }
 
 # --------------------------------------------------------------------------------------------------
 
