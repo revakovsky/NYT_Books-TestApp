@@ -1,6 +1,6 @@
 package com.revakovskyi.core.presentation.utils.text_converters
 
-import com.revakovskyi.core.domain.books.DataError
+import com.revakovskyi.core.domain.utils.DataError
 import com.revakovskyi.core.presentation.utils.R
 import com.revakovskyi.core.presentation.utils.UiText
 

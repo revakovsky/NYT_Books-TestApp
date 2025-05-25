@@ -1,6 +1,7 @@
 package com.revakovskyi.core.presentation.design_system
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -14,7 +15,7 @@ fun DefaultScaffold(
 
     Scaffold(
         topBar = topAppBar,
-        modifier = modifier,
+        modifier = modifier.safeDrawingPadding()
     ) { paddingValues ->
 
         content(paddingValues)

@@ -3,12 +3,15 @@ package com.revakovskyi.auth.presentation.auth_client.google
 import com.revakovskyi.auth.presentation.auth_client.firebase.FirebaseAuthenticator
 import com.revakovskyi.core.domain.auth.AuthError
 import com.revakovskyi.core.domain.auth.User
-import com.revakovskyi.core.domain.util.EmptyDataResult
-import com.revakovskyi.core.domain.util.Result
-import com.revakovskyi.core.domain.util.asEmptyDataResult
-import com.revakovskyi.core.domain.util.successfulResult
+import com.revakovskyi.core.domain.utils.EmptyDataResult
+import com.revakovskyi.core.domain.utils.Result
+import com.revakovskyi.core.domain.utils.asEmptyDataResult
+import com.revakovskyi.core.domain.utils.successfulResult
 
-interface GoogleAuthClient {
+/**
+ * Interface for handling authentication via Google, including sign-in and sign-out flows.
+ */
+internal interface GoogleAuthClient {
     fun isSignedIn(): Boolean
     fun getSignedInUser(): User?
     suspend fun signIn(manager: GoogleCredentialManager): EmptyDataResult<AuthError>
@@ -16,6 +19,10 @@ interface GoogleAuthClient {
 }
 
 
+/**
+ * Default implementation of [GoogleAuthClient] that handles sign-in/sign-out using
+ * Firebase Authentication and Google Credential Manager.
+ */
 internal class GoogleAuthClientImpl(
     private val firebaseAuthenticator: FirebaseAuthenticator,
 ) : GoogleAuthClient {

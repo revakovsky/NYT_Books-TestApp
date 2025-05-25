@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="sign_out">Sign Out</string>
+    <string name="sign_out_title">Sign Out</string>
+    <string name="sign_out_description">Are you sure you want to sign out?</string>
+    <string name="stay">Stay</string>
+    <string name="sign_out_confirm">Sign Out</string>
+    <string name="published_date">Published date: %1$s</string>
+    <string name="updates">Updates: %1$s</string>
+    <string name="weekly">Weekly</string>
+    <string name="monthly">Monthly</string>
+    <string name="successfully_refreshed">Successfully refreshed</string>
 </resources>

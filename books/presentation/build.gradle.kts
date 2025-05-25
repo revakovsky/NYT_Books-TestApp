@@ -15,7 +15,10 @@ dependencies {
     implementation(projects.core.presentation.utils)
     implementation(projects.core.presentation.designSystem)
 
-    //Koin
+    // Koin
     implementation(project.libs.bundles.koin)
+
+    //Timber
+    implementation(project.libs.timber)
 
 }

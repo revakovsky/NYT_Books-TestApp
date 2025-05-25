@@ -38,7 +38,7 @@ import com.revakovskyi.core.presentation.theme.NYTBooksTheme
 import com.revakovskyi.core.presentation.theme.dimens
 
 @Composable
-fun GoogleButton(
+internal fun GoogleButton(
     modifier: Modifier = Modifier,
     loading: Boolean = false,
     primaryText: String = stringResource(R.string.sign_in_with_google),

@@ -1,8 +1,7 @@
 package com.revakovskyi.core.network.tools
 
-import android.util.Log
-import com.revakovskyi.core.domain.books.DataError
-import com.revakovskyi.core.domain.util.Result
+import com.revakovskyi.core.domain.utils.DataError
+import com.revakovskyi.core.domain.utils.Result
 import com.revakovskyi.core.network.BuildConfig
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -15,6 +14,7 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.SerializationException
+import timber.log.Timber
 
 /**
  * Executes a network call safely, converting exceptions into [Result] errors.
@@ -25,7 +25,7 @@ import kotlinx.serialization.SerializationException
  * @param execute A lambda that executes the network call and returns an [HttpResponse].
  * @return A [Result] containing either the parsed response body or a network error.
  */
-suspend inline fun <reified T> safeNetworkCall(
+internal suspend inline fun <reified T> safeNetworkCall(
     dispatcher: CoroutineDispatcher,
     noinline execute: suspend () -> HttpResponse,
 ): Result<T, DataError.Network> {
@@ -33,13 +33,13 @@ suspend inline fun <reified T> safeNetworkCall(
         try {
             responseToResult(execute())
         } catch (e: UnresolvedAddressException) {
-            Log.e("SafeNetworkCall", "No internet", e)
+            Timber.e(e, "No internet")
             Result.Error(DataError.Network.NO_INTERNET)
         } catch (e: SerializationException) {
-            Log.e("SafeNetworkCall", "Serialization error", e)
+            Timber.e(e, "Serialization error")
             Result.Error(DataError.Network.SERIALIZATION)
         } catch (e: Exception) {
-            Log.e("SafeNetworkCall", "Unknown network error", e)
+            Timber.e(e, "Unknown network error")
             if (e is CancellationException) throw e
             Result.Error(DataError.Network.UNKNOWN)
         }
@@ -56,7 +56,7 @@ suspend inline fun <reified T> safeNetworkCall(
  * @param response The [HttpResponse] to process.
  * @return A [Result] containing either the parsed response body or a network error.
  */
-suspend inline fun <reified T> responseToResult(response: HttpResponse): Result<T, DataError.Network> {
+internal suspend inline fun <reified T> responseToResult(response: HttpResponse): Result<T, DataError.Network> {
     return when (response.status.value) {
         in 200..299 -> Result.Success(response.body<T>())
         401 -> Result.Error(DataError.Network.UNAUTHORIZED)
@@ -79,7 +79,7 @@ suspend inline fun <reified T> responseToResult(response: HttpResponse): Result<
  * @param queryParameters A map of query parameters to include in the request.
  * @return A [Result] containing either the parsed response body or a network error.
  */
-suspend inline fun <reified Response : Any> HttpClient.get(
+internal suspend inline fun <reified Response : Any> HttpClient.get(
     dispatcher: CoroutineDispatcher,
     route: String,
     queryParameters: Map<String, Any?> = mapOf(),
@@ -105,7 +105,7 @@ suspend inline fun <reified Response : Any> HttpClient.get(
  * @param route The relative or full URL.
  * @return The constructed full URL as a [String].
  */
-fun constructRoute(route: String): String {
+internal fun constructRoute(route: String): String {
     return when {
         route.contains(BuildConfig.BASE_URL) -> route
         route.startsWith("/") -> BuildConfig.BASE_URL + route

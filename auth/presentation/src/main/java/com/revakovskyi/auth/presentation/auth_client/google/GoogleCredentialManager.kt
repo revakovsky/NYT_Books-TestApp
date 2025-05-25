@@ -1,7 +1,6 @@
 package com.revakovskyi.auth.presentation.auth_client.google
 
 import android.app.Activity
-import android.util.Log
 import androidx.credentials.ClearCredentialStateRequest
 import androidx.credentials.Credential
 import androidx.credentials.CredentialManager
@@ -14,22 +13,29 @@ import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.GoogleAuthProvider
 import com.revakovskyi.auth.presentation.R
 import com.revakovskyi.core.domain.auth.AuthError
-import com.revakovskyi.core.domain.util.EmptyDataResult
-import com.revakovskyi.core.domain.util.Result
-import com.revakovskyi.core.domain.util.successfulResult
+import com.revakovskyi.core.domain.utils.EmptyDataResult
+import com.revakovskyi.core.domain.utils.Result
+import com.revakovskyi.core.domain.utils.successfulResult
 import kotlinx.coroutines.CancellationException
+import timber.log.Timber
 
+/**
+ * Abstraction for acquiring and clearing Google credentials via the Credential Manager API.
+ */
 interface GoogleCredentialManager {
     suspend fun getAuthCredential(): Result<AuthCredential, AuthError>
     suspend fun clear(): EmptyDataResult<AuthError>
 }
 
 
+/**
+ * Default implementation of [GoogleCredentialManager] using the Credential Manager API.
+ *
+ * @param activity The activity used to launch the Google sign-in UI.
+ */
 class GoogleCredentialManagerImpl(
     private val activity: Activity,
 ) : GoogleCredentialManager {
-
-    private val tag = "GoogleCredentialManagerImpl"
 
     private val credentialManager = CredentialManager.create(activity)
 
@@ -48,11 +54,11 @@ class GoogleCredentialManagerImpl(
 
                 Result.Success(authCredential)
             } else {
-                Log.e(tag, "Unsupported credential type")
+                Timber.e("Unsupported credential type")
                 Result.Error(AuthError.Google.UNSUPPORTED_CREDENTIAL_TYPE)
             }
         } catch (e: Exception) {
-            Log.e(tag, "Credential fetch failed", e)
+            Timber.e(e, "Credential fetch failed")
             if (e is CancellationException) throw e
             Result.Error(AuthError.Google.CREDENTIAL_FETCH_FAILED)
         }
@@ -63,7 +69,7 @@ class GoogleCredentialManagerImpl(
             credentialManager.clearCredentialState(ClearCredentialStateRequest())
             successfulResult()
         } catch (e: Exception) {
-            Log.e(tag, "Couldn't clear credentials", e)
+            Timber.e(e, "Couldn't clear credentials")
             Result.Error(AuthError.Google.CREDENTIAL_CLEAR_FAILED)
         }
     }

@@ -15,6 +15,17 @@ private const val BASE_URL = "BASE_URL"
 private const val BASE_URL_VALUE = "https://api.nytimes.com/svc/books/v3"
 
 
+/**
+ * Configures `debug` and `release` build types for either an application or library module.
+ *
+ * This function:
+ * - Enables `BuildConfig` generation
+ * - Loads `apiKey` and `baseUrl` from local Gradle properties
+ * - Applies build type configuration based on the [extensionType] (application or library)
+ *
+ * @param commonExtension The shared [CommonExtension] for configuring Android builds.
+ * @param extensionType Type of the module being configured ([ExtensionType.APPLICATION] or [ExtensionType.LIBRARY]).
+ */
 internal fun Project.configureBuildTypes(
     commonExtension: CommonExtension<*, *, *, *, *, *>,
     extensionType: ExtensionType,
@@ -40,6 +51,14 @@ internal fun Project.configureBuildTypes(
 }
 
 
+/**
+ * Configures build types for Android application modules.
+ *
+ * Sets up:
+ * - `debug` and `release` build types
+ * - Default `BuildConfig` fields (API key and base URL)
+ * - ProGuard for release builds
+ */
 private fun Project.setUpApplicationBuildTypes(
     apiKey: String,
     baseUrl: String,
@@ -54,6 +73,15 @@ private fun Project.setUpApplicationBuildTypes(
 }
 
 
+/**
+ * Configures `debug` and `release` build types for Android library modules.
+ *
+ * This setup mirrors [setUpApplicationBuildTypes], but is specifically tailored for modules
+ * using [LibraryExtension]. It applies standard BuildConfig fields (e.g., API key and base URL)
+ * and optionally configures ProGuard rules for release builds.
+ *
+ * Typically used in library modules that require runtime configuration via `BuildConfig`.
+ */
 private fun Project.setUpLibraryBuildTypes(
     apiKey: String,
     baseUrl: String,
@@ -68,6 +96,12 @@ private fun Project.setUpLibraryBuildTypes(
 }
 
 
+/**
+ * Adds API key and base URL to `BuildConfig` for the `debug` build type.
+ *
+ * @param apiKey The API key to embed in the build.
+ * @param baseUrl The base URL to embed in the build.
+ */
 private fun BuildType.configureDebugBuildType(apiKey: String, baseUrl: String) {
     // In the project used plugs because this is a test project!
     buildConfigField("String", API_KEY, "\"$API_KEY_VALUE\"")
@@ -75,6 +109,13 @@ private fun BuildType.configureDebugBuildType(apiKey: String, baseUrl: String) {
 }
 
 
+/**
+ * Adds API key and base URL to `BuildConfig`, enables minification, and applies ProGuard rules for `release` builds.
+ *
+ * @param commonExtension Common Android extension for access to default ProGuard file.
+ * @param apiKey The API key to embed in the build.
+ * @param baseUrl The base URL to embed in the build.
+ */
 private fun BuildType.configureReleaseBuildType(
     commonExtension: CommonExtension<*, *, *, *, *, *>,
     apiKey: String,

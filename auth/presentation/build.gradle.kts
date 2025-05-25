@@ -22,4 +22,7 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.bundles.auth)
 
+    //Timber
+    implementation(project.libs.timber)
+
 }

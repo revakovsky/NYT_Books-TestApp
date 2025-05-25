@@ -5,10 +5,20 @@ import com.revakovskyi.convention.application.libs
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 
+/**
+ * Configures Jetpack Compose support for Android **application** modules.
+ *
+ * This function builds on top of [configureAndroidLibraryCompose] to enable Compose,
+ * and additionally includes navigation dependencies (e.g., `androidx.navigation`).
+ *
+ * Typically used inside a Gradle convention plugin for application modules that use Compose.
+ *
+ * @param commonExtension The Android application module extension.
+ */
 internal fun Project.configureAndroidApplicationCompose(
     commonExtension: CommonExtension<*, *, *, *, *, *>,
 ) {
-    configureAndroidCompose(commonExtension)
+    configureAndroidLibraryCompose(commonExtension)
 
     commonExtension.run {
         dependencies {
@@ -18,7 +28,19 @@ internal fun Project.configureAndroidApplicationCompose(
 }
 
 
-internal fun Project.configureAndroidCompose(
+/**
+ * Configures Jetpack Compose support for Android **library** modules.
+ *
+ * Enables the Compose build feature and adds:
+ * - Compose BOM for version alignment
+ * - Core Compose libraries (`compose` bundle)
+ * - Debug tooling support (`androidx-ui-tooling`)
+ *
+ * Typically used inside convention plugins for UI or shared modules that use Compose.
+ *
+ * @param commonExtension The Android library or application module extension.
+ */
+internal fun Project.configureAndroidLibraryCompose(
     commonExtension: CommonExtension<*, *, *, *, *, *>,
 ) {
     commonExtension.run {

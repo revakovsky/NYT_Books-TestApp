@@ -12,6 +12,6 @@ val SecondaryGray_Light = Color(0xFF353535)
 // Dark theme
 val BackgroundBlack_Dark = Color(0xFF1E1E1E)
 val OnBackgroundWhite_Dark = Color(0xFFEEEEEE)
-val SurfaceBlack_Dark = Color(0xFF121212)
+val SurfaceBlack_Dark = Color(0xFF424040)
 val OnSurfaceWhite_Dark = Color(0xFFAAAAAA)
 val SecondaryGray_Dark = Color(0xFFE7E6E6)

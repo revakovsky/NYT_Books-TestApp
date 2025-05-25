@@ -8,7 +8,7 @@ import com.revakovskyi.core.domain.auth.AuthError
 import com.revakovskyi.core.domain.auth.AuthProvider
 import com.revakovskyi.core.domain.connectivity.ConnectivityObserver
 import com.revakovskyi.core.domain.connectivity.InternetStatus
-import com.revakovskyi.core.domain.util.Result
+import com.revakovskyi.core.domain.utils.Result
 import com.revakovskyi.core.presentation.utils.base_viewmodel.BaseViewModel
 import com.revakovskyi.core.presentation.utils.text_converters.toUiText
 import kotlinx.coroutines.flow.first
