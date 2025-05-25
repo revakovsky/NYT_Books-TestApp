@@ -13,10 +13,12 @@ import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.revakovskyi.books.presentation.R
+import com.revakovskyi.books.presentation.books_by_category.components.BookItem
 import com.revakovskyi.core.presentation.design_system.DefaultPullRefreshBox
 import com.revakovskyi.core.presentation.design_system.DefaultScaffold
 import com.revakovskyi.core.presentation.design_system.DefaultToolbar
@@ -74,12 +76,14 @@ private fun BooksScreen(
 
 
     DefaultScaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topAppBar = {
             DefaultToolbar(
                 showBackButton = true,
+                titleSingleLine = true,
                 scrollBehavior = scrollBehavior,
                 title = state.categoryName,
-                titleStyle = MaterialTheme.typography.bodyLarge,
+                titleStyle = MaterialTheme.typography.bodyLarge.copy(),
                 onBackClick = { onAction(BooksAction.BackToCategories) },
             )
         },
@@ -102,7 +106,11 @@ private fun BooksScreen(
                         key = { _, it -> it.id }
                     ) { index, book ->
 
-                        // TODO
+                        BookItem(
+                            book = book,
+                            showDivider = index != state.books.lastIndex,
+                            onBuyClick = { bookId -> onAction(BooksAction.BuyBook(bookId)) }
+                        )
 
                     }
                 }

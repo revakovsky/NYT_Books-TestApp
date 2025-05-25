@@ -20,6 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
@@ -87,7 +88,7 @@ private fun CategoriesScreen(
     val context = LocalContext.current
     val topAppBarState = rememberTopAppBarState()
 
-    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(state = topAppBarState)
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(state = topAppBarState)
     val signOutIcon = ImageVector.vectorResource(R.drawable.sign_out)
 
     var showSignOutDialog by rememberSaveable { mutableStateOf(false) }
@@ -103,6 +104,7 @@ private fun CategoriesScreen(
 
 
     DefaultScaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topAppBar = {
             DefaultToolbar(
                 showBackButton = false,
