@@ -7,11 +7,14 @@ import com.revakovskyi.books.presentation.R
 import com.revakovskyi.core.domain.books.Book
 import com.revakovskyi.core.domain.books.Store
 import com.revakovskyi.core.domain.connectivity.ConnectivityObserver
+import com.revakovskyi.core.domain.connectivity.InternetStatus
 import com.revakovskyi.core.domain.utils.Result
 import com.revakovskyi.core.presentation.utils.UiText
 import com.revakovskyi.core.presentation.utils.base_viewmodel.BaseViewModel
 import com.revakovskyi.core.presentation.utils.text_converters.asUiText
+import com.revakovskyi.core.presentation.utils.text_converters.toUiText
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -81,7 +84,18 @@ class BooksViewModel(
     }
 
     private fun openSelectedStore(storeUrl: String) {
-        // TODO: check the internet and then get a link for the store
+        viewModelScope.launch {
+            when (val internetStatus = connectivityObserver.internetStatus.first()) {
+                InternetStatus.AVAILABLE, InternetStatus.LOSING -> {
+                    sendEvent(BooksEvent.OpenStore(storeUrl))
+                }
+
+                else -> {
+                    sendEvent(BooksEvent.DataError(internetStatus.toUiText()))
+                    hideStoresDialog()
+                }
+            }
+        }
     }
 
     private fun handleBooksResult(books: List<Book>, forceRefresh: Boolean) {
