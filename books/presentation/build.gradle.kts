@@ -21,4 +21,7 @@ dependencies {
     //Timber
     implementation(project.libs.timber)
 
+    //Timber
+    implementation(project.libs.coil.compose)
+
 }

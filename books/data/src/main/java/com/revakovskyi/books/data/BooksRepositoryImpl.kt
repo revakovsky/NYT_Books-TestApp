@@ -50,8 +50,8 @@ class BooksRepositoryImpl(
         } else loadBooksFromCache(categoryName)
     }
 
-    override fun getStoresWithBook(bookTitle: String): Flow<Result<List<Store>, DataError>> {
-        return dbClient.getStoresWithBook(bookTitle).map { result ->
+    override fun getStoresWithBook(bookId: String): Flow<Result<List<Store>, DataError>> {
+        return dbClient.getStoresWithBook(bookId).map { result ->
             when (result) {
                 is Result.Error -> Result.Error(result.error)
                 is Result.Success -> {

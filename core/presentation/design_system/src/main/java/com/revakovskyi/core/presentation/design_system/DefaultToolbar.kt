@@ -32,6 +32,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.sp
 import com.revakovskyi.core.presentation.design_system.util.DropDownItem
 import com.revakovskyi.core.presentation.theme.dimens
@@ -41,6 +43,8 @@ import com.revakovskyi.core.presentation.theme.dimens
 fun DefaultToolbar(
     modifier: Modifier = Modifier,
     title: String = stringResource(R.string.app_name),
+    titleSingleLine: Boolean = false,
+    titleStyle: TextStyle = MaterialTheme.typography.titleSmall.copy(fontSize = 32.sp),
     showBackButton: Boolean,
     @DrawableRes backVectorIconResId: Int = R.drawable.arrow_left,
     menuItems: List<DropDownItem> = emptyList(),
@@ -60,9 +64,10 @@ fun DefaultToolbar(
 
                 Text(
                     text = title,
-                    style = MaterialTheme.typography.titleSmall,
+                    style = titleStyle,
                     color = MaterialTheme.colorScheme.onBackground,
-                    fontSize = 32.sp,
+                    maxLines = if (titleSingleLine) 1 else Int.MAX_VALUE,
+                    overflow = TextOverflow.Ellipsis,
                 )
             }
         },
@@ -132,7 +137,10 @@ fun DefaultToolbar(
 
         },
         scrollBehavior = scrollBehavior,
-        colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = Color.Transparent,
+            scrolledContainerColor = Color.Transparent
+        ),
         modifier = modifier,
     )
 

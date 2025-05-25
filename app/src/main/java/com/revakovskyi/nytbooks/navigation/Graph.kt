@@ -25,7 +25,7 @@ sealed interface Graph {
             data class BookList(val categoryName: String) : Destination
 
             @Serializable
-            data object Store : Destination
+            data class Store(val storeUrl: String) : Destination
         }
     }
 

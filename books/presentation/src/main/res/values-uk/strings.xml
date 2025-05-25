@@ -10,4 +10,16 @@
     <string name="weekly">Щотижня</string>
     <string name="monthly">Щомісяця</string>
     <string name="successfully_refreshed">Успішно оновлено</string>
+    <string name="error_missing_category_name">Відсутня назва категорії. Спробуйте ще раз</string>
+    <string name="error_no_books_found">У цій категорії не знайдено жодної книги</string>
+    <string name="book_image">Зображення книги</string>
+    <string name="book_author">Автор: %1$s</string>
+    <string name="book_rank">Рейтинг: %1$s</string>
+    <string name="publisher">Видавець: %1$s</string>
+    <string name="buy">Купити</string>
+    <string name="description">Опис: %1$s</string>
+    <string name="description_is_not_available">Опис для цієї книги недоступний</string>
+    <string name="image_is_not_available">Зображення для цієї книги недоступне</string>
+    <string name="select_a_store">Оберіть магазин:</string>
+    <string name="error_no_stores_found">Не знайдено жодного магазину для цієї книги</string>
 </resources>
