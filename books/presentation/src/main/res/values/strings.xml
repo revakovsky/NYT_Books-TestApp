@@ -9,4 +9,5 @@
     <string name="updates">Updates: %1$s</string>
     <string name="weekly">Weekly</string>
     <string name="monthly">Monthly</string>
+    <string name="successfully_refreshed">Successfully refreshed</string>
 </resources>

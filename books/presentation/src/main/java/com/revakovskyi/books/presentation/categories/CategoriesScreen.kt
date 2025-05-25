@@ -1,22 +1,14 @@
-@file:OptIn(ExperimentalMaterialApi::class)
-
 package com.revakovskyi.books.presentation.categories
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.pullrefresh.PullRefreshIndicator
-import androidx.compose.material.pullrefresh.pullRefresh
-import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
@@ -25,7 +17,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -40,6 +31,7 @@ import com.revakovskyi.books.presentation.categories.components.CategoryItem
 import com.revakovskyi.core.presentation.design_system.DefaultButton
 import com.revakovskyi.core.presentation.design_system.DefaultDialog
 import com.revakovskyi.core.presentation.design_system.DefaultOutlinedButton
+import com.revakovskyi.core.presentation.design_system.DefaultPullRefreshBox
 import com.revakovskyi.core.presentation.design_system.DefaultScaffold
 import com.revakovskyi.core.presentation.design_system.DefaultToolbar
 import com.revakovskyi.core.presentation.design_system.util.DropDownItem
@@ -61,14 +53,20 @@ fun CategoriesScreenRoot(
 
     ObserveSingleEvent(viewModel.event) { event ->
         when (event) {
+            is CategoriesEvent.OpenBooksByCategory -> openBooksByCategory(event.categoryName)
             CategoriesEvent.SignOut -> signOut()
+
             is CategoriesEvent.DataError -> {
                 SnackBarController.sendEvent(
                     SnackBarEvent(message = event.message.asString(context))
                 )
             }
 
-            is CategoriesEvent.OpenBooksByCategory -> openBooksByCategory(event.categoryName)
+            CategoriesEvent.SuccessfullyRefreshed -> {
+                SnackBarController.sendEvent(
+                    SnackBarEvent(message = context.getString(R.string.successfully_refreshed))
+                )
+            }
         }
     }
 
@@ -88,16 +86,11 @@ private fun CategoriesScreen(
 ) {
     val context = LocalContext.current
     val topAppBarState = rememberTopAppBarState()
-    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(state = topAppBarState)
 
-    val pullRefreshState = rememberPullRefreshState(
-        refreshing = state.isLoading,
-        onRefresh = { onAction(CategoriesAction.ForceUpdateCategories) },
-    )
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(state = topAppBarState)
+    val signOutIcon = ImageVector.vectorResource(R.drawable.sign_out)
 
     var showSignOutDialog by rememberSaveable { mutableStateOf(false) }
-
-    val signOutIcon = ImageVector.vectorResource(R.drawable.sign_out)
 
     val menuItems = remember {
         listOf(
@@ -107,6 +100,7 @@ private fun CategoriesScreen(
             ),
         )
     }
+
 
     DefaultScaffold(
         topAppBar = {
@@ -132,42 +126,36 @@ private fun CategoriesScreen(
         },
     ) { paddingValues ->
 
-        Box(
+        DefaultPullRefreshBox(
             modifier = Modifier
                 .fillMaxSize()
-                .pullRefresh(pullRefreshState)
-                .padding(paddingValues)
-        ) {
+                .padding(paddingValues),
+            isRefreshing = state.isRefreshing,
+            onRefresh = { onAction(CategoriesAction.ForceRefreshCategories) },
+            content = {
 
-            LazyColumn(
-                state = rememberLazyListState(),
-                modifier = Modifier.fillMaxSize()
-            ) {
-                itemsIndexed(
-                    items = state.categories,
-                    key = { _, it -> it.name }
-                ) { index, category ->
+                LazyColumn(
+                    state = rememberLazyListState(),
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    itemsIndexed(
+                        items = state.categories,
+                        key = { _, it -> it.name }
+                    ) { index, category ->
 
-                    CategoryItem(
-                        category = category,
-                        showDivider = index != state.categories.lastIndex,
-                        onCategoryClick = { categoryName ->
-                            onAction(CategoriesAction.OpenBooksByCategory(categoryName))
-                        }
-                    )
+                        CategoryItem(
+                            category = category,
+                            showDivider = index != state.categories.lastIndex,
+                            onCategoryClick = { categoryName ->
+                                onAction(CategoriesAction.OpenBooksByCategory(categoryName))
+                            }
+                        )
 
+                    }
                 }
-            }
 
-            PullRefreshIndicator(
-                refreshing = state.isLoading,
-                state = pullRefreshState,
-                modifier = Modifier.align(Alignment.TopCenter),
-                backgroundColor = MaterialTheme.colorScheme.onBackground,
-                contentColor = MaterialTheme.colorScheme.background
-            )
-
-        }
+            },
+        )
 
     }
 

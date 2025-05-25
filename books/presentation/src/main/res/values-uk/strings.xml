@@ -9,4 +9,5 @@
     <string name="updates">Оновлення: %1$s</string>
     <string name="weekly">Щотижня</string>
     <string name="monthly">Щомісяця</string>
+    <string name="successfully_refreshed">Успішно оновлено</string>
 </resources>

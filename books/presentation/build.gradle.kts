@@ -18,9 +18,6 @@ dependencies {
     // Koin
     implementation(project.libs.bundles.koin)
 
-    // Pull Refresh
-    implementation(project.libs.compose.pullrefresh)
-
     //Timber
     implementation(project.libs.timber)
 
