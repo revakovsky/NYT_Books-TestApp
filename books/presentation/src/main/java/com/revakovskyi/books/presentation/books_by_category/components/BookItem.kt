@@ -93,6 +93,7 @@ fun BookItem(
                 modifier = Modifier.padding(top = MaterialTheme.dimens.spacing.medium)
             )
         }
+
     }
 
 }

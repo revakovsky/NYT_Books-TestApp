@@ -6,6 +6,6 @@ sealed interface BooksAction {
     data object HideStoresDialog : BooksAction
     data object ForceRefreshBooks : BooksAction
     data class BuyBook(val bookId: String) : BooksAction
-    data class StoreSelected(val storeName: String) : BooksAction
+    data class StoreSelected(val storeUrl: String) : BooksAction
 
 }

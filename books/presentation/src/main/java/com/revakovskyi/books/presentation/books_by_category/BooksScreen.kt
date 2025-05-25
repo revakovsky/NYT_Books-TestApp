@@ -19,6 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.revakovskyi.books.presentation.R
 import com.revakovskyi.books.presentation.books_by_category.components.BookItem
+import com.revakovskyi.books.presentation.books_by_category.components.StoresDialog
 import com.revakovskyi.core.presentation.design_system.DefaultPullRefreshBox
 import com.revakovskyi.core.presentation.design_system.DefaultScaffold
 import com.revakovskyi.core.presentation.design_system.DefaultToolbar
@@ -123,9 +124,13 @@ private fun BooksScreen(
 
     AnimatedVisibility(
         label = "",
-        visible = state.stores.isNotEmpty()
+        visible = state.showStoresDialog
     ) {
-        // TODO
+        StoresDialog(
+            stores = state.stores,
+            onDismiss = { onAction(BooksAction.HideStoresDialog) },
+            onStoreSelected = { storeUrl -> onAction(BooksAction.StoreSelected(storeUrl)) }
+        )
     }
 
 }

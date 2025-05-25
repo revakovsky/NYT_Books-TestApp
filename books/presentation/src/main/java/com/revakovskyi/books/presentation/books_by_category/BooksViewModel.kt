@@ -5,13 +5,16 @@ import androidx.lifecycle.viewModelScope
 import com.revakovskyi.books.domain.BooksRepository
 import com.revakovskyi.books.presentation.R
 import com.revakovskyi.core.domain.books.Book
+import com.revakovskyi.core.domain.books.Store
 import com.revakovskyi.core.domain.connectivity.ConnectivityObserver
 import com.revakovskyi.core.domain.utils.Result
 import com.revakovskyi.core.presentation.utils.UiText
 import com.revakovskyi.core.presentation.utils.base_viewmodel.BaseViewModel
 import com.revakovskyi.core.presentation.utils.text_converters.asUiText
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
 class BooksViewModel(
     savedStateHandle: SavedStateHandle,
@@ -36,7 +39,7 @@ class BooksViewModel(
             BooksAction.HideStoresDialog -> hideStoresDialog()
             BooksAction.ForceRefreshBooks -> forceRefreshBooks()
             is BooksAction.BuyBook -> buyBook(action.bookId)
-            is BooksAction.StoreSelected -> openSelectedStore(action.storeName)
+            is BooksAction.StoreSelected -> openSelectedStore(action.storeUrl)
         }
     }
 
@@ -55,7 +58,11 @@ class BooksViewModel(
     }
 
     private fun hideStoresDialog() {
-        updateState { it.copy(stores = emptyList()) }
+        viewModelScope.launch {
+            updateState { it.copy(showStoresDialog = false) }
+            delay(400)
+            updateState { it.copy(stores = emptyList()) }
+        }
     }
 
     private fun forceRefreshBooks() {
@@ -64,10 +71,16 @@ class BooksViewModel(
     }
 
     private fun buyBook(bookId: String) {
-        // TODO: get stores for the current bookId
+        booksRepository.getStoresWithBook(bookId)
+            .onEach { result ->
+                when (result) {
+                    is Result.Error -> sendEvent(BooksEvent.DataError(result.error.asUiText()))
+                    is Result.Success -> handleStoresResult(result.data)
+                }
+            }.launchIn(viewModelScope)
     }
 
-    private fun openSelectedStore(storeName: String) {
+    private fun openSelectedStore(storeUrl: String) {
         // TODO: check the internet and then get a link for the store
     }
 
@@ -78,6 +91,14 @@ class BooksViewModel(
         } else {
             updateState { it.copy(isRefreshing = false) }
             sendEvent(BooksEvent.DataError(UiText.StringResource(R.string.error_no_books_found)))
+        }
+    }
+
+    private fun handleStoresResult(stores: List<Store>) {
+        if (stores.isNotEmpty()) {
+            updateState { it.copy(stores = stores, showStoresDialog = true) }
+        } else {
+            sendEvent(BooksEvent.DataError(UiText.StringResource(R.string.error_no_stores_found)))
         }
     }
 

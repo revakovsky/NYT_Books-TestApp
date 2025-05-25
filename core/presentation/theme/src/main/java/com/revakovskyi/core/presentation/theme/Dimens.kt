@@ -16,7 +16,6 @@ val MaterialTheme.dimens: Dimens
 
 data class Dimens(
     val spacing: SpacingDimens = SpacingDimens(),
-    val image: BookImageDimens = BookImageDimens(),
 )
 
 data class SpacingDimens(
@@ -28,9 +27,4 @@ data class SpacingDimens(
     val large: Dp = 32.dp,
     val extraLarge: Dp = 64.dp,
     val largest: Dp = 128.dp,
-)
-
-data class BookImageDimens(
-    val width: Dp = 200.dp,
-    val height: Dp = 250.dp,
 )
