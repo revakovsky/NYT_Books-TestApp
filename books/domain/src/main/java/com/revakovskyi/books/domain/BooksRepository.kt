@@ -11,8 +11,8 @@ import kotlinx.coroutines.flow.Flow
 interface BooksRepository {
 
     fun getBookCategories(forceRefresh: Boolean): Flow<Result<List<Category>, DataError>>
-    fun getBooksByCategory(categoryName: String, forceRefresh: Boolean, ): Flow<Result<List<Book>, DataError>>
-    fun getStoresWithBook(bookTitle: String): Flow<Result<List<Store>, DataError>>
+    fun getBooksByCategory(categoryName: String, forceRefresh: Boolean): Flow<Result<List<Book>, DataError>>
+    fun getStoresWithBook(bookId: String): Flow<Result<List<Store>, DataError>>
     suspend fun clearDb(): EmptyDataResult<DataError.Local>
 
 }

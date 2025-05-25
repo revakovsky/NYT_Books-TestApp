@@ -10,4 +10,5 @@
     <string name="weekly">Щотижня</string>
     <string name="monthly">Щомісяця</string>
     <string name="successfully_refreshed">Успішно оновлено</string>
+    <string name="error_missing_category_name">Відсутня назва категорії. Спробуйте ще раз</string>
 </resources>

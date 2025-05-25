@@ -10,4 +10,5 @@
     <string name="weekly">Weekly</string>
     <string name="monthly">Monthly</string>
     <string name="successfully_refreshed">Successfully refreshed</string>
+    <string name="error_missing_category_name">Missing category name. Please try again</string>
 </resources>
