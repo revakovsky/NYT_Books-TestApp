@@ -70,6 +70,7 @@ Concerns.
 - [Firebase Authentication (Google Sign-In)](https://firebase.google.com/docs/auth/android/google-signin)
 - [WebView](https://developer.android.com/develop/ui/views/layout/webapps/webview)
 - [PullRefresh](https://developer.android.com/develop/ui/compose/components/pull-to-refresh)
+- [Timber](https://github.com/JakeWharton/timber)
 
 ### Features and Functionality
 
