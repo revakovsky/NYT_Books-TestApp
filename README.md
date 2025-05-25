@@ -20,7 +20,7 @@ Then users can:
 - Tap a category to see a list of books within that category
 - View book details such as title, description, author, publisher, image, and rank
 - Click the “Buy” button to open a dialog with a list of online bookstores
-- Select a store to open its website directly in an in-app browser (WebView)
+- Select a store to open its website directly in an in-app browser (Android Chrome Tabs)
 - Swipe down to refresh the book list from the network
 
 If the network is unavailable, the app automatically falls back to data from the local Room
