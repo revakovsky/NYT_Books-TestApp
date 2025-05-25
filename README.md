@@ -68,8 +68,8 @@ Concerns.
 - [Android Splash Screen API](https://developer.android.com/develop/ui/views/launch/splash-screen)
 - [Connectivity Manager](https://developer.android.com/training/monitoring-device-state/connectivity-status-type)
 - [Firebase Authentication (Google Sign-In)](https://firebase.google.com/docs/auth/android/google-signin)
-- [WebView](https://developer.android.com/develop/ui/views/layout/webapps/webview)
-- [PullToRefresh](https://developer.android.com/develop/ui/compose/components/pull-to-refresh)
+- [Android Custom Chrome Tabs](https://developer.android.com/develop/ui/views/layout/webapps/overview-of-android-custom-tabs)
+- [Pull To Refresh](https://developer.android.com/develop/ui/compose/components/pull-to-refresh)
 - [Timber](https://github.com/JakeWharton/timber)
 
 ### Features and Functionality
