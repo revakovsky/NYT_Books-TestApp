@@ -49,7 +49,7 @@ fun StoresDialog(
                 text = stringResource(R.string.select_a_store),
                 style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.onSurface,
+                color = MaterialTheme.colorScheme.onBackground,
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -108,7 +108,10 @@ private fun DialogItem(
             )
 
             if (showDivider) {
-                HorizontalDivider(modifier = Modifier.padding(top = MaterialTheme.dimens.spacing.medium))
+                HorizontalDivider(
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f),
+                    modifier = Modifier.padding(top = MaterialTheme.dimens.spacing.medium)
+                )
             } else {
                 Spacer(modifier = Modifier.height(16.dp))
             }
