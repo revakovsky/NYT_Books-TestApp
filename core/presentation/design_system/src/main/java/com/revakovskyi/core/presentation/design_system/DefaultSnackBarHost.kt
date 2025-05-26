@@ -56,14 +56,14 @@ fun DefaultSnackBarHost(
         SnackbarHost(hostState = snackBarHostState) { data: SnackbarData ->
 
             Snackbar(
-                containerColor = MaterialTheme.colorScheme.surface,
+                containerColor = MaterialTheme.colorScheme.secondary,
                 action = {
                     if (event.action?.name != null) {
                         Text(
                             text = event.action!!.name,
                             style = MaterialTheme.typography.bodyMedium,
                             overflow = TextOverflow.Ellipsis,
-                            color = MaterialTheme.colorScheme.onSurface,
+                            color = MaterialTheme.colorScheme.background,
                             modifier = Modifier
                                 .padding(vertical = 8.dp)
                                 .padding(end = 16.dp)
@@ -80,7 +80,7 @@ fun DefaultSnackBarHost(
                     Text(
                         text = data.visuals.message,
                         style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurface,
+                        color = MaterialTheme.colorScheme.surface,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.padding(vertical = 8.dp)
                     )
